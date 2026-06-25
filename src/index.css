@@ -1,0 +1,136 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    color-scheme: dark;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-ink-900 text-cream font-body antialiased;
+    /* Layered romantic glow over midnight navy */
+    background-image:
+      radial-gradient(60rem 60rem at 12% -8%, rgba(255, 77, 109, 0.22), transparent 60%),
+      radial-gradient(55rem 55rem at 92% 8%, rgba(56, 189, 248, 0.18), transparent 60%),
+      radial-gradient(70rem 50rem at 50% 112%, rgba(140, 15, 36, 0.28), transparent 62%),
+      linear-gradient(180deg, #060a1a 0%, #0a1128 45%, #070b1c 100%);
+    background-attachment: fixed;
+    text-rendering: optimizeLegibility;
+  }
+
+  ::selection {
+    background: rgba(255, 77, 109, 0.35);
+    color: #fff;
+  }
+
+  /* Slim themed scrollbar */
+  ::-webkit-scrollbar {
+    width: 10px;
+  }
+  ::-webkit-scrollbar-track {
+    background: #060a1a;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: linear-gradient(180deg, #c41e3a, #1f7fb8);
+    border-radius: 9999px;
+    border: 2px solid #060a1a;
+  }
+
+  :focus-visible {
+    outline: 2px solid #7df0ff;
+    outline-offset: 3px;
+    border-radius: 6px;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.001ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.001ms !important;
+    }
+  }
+}
+
+@layer components {
+  /* Frosted glass card */
+  .glass {
+    @apply rounded-3xl border border-white/10 bg-white/[0.045] shadow-glass backdrop-blur-xl;
+  }
+
+  .glass-strong {
+    @apply rounded-3xl border border-white/15 bg-white/[0.07] shadow-glass backdrop-blur-2xl;
+  }
+
+  /* Animated red→sky gradient text */
+  .text-gradient {
+    @apply bg-romance-gradient bg-clip-text text-transparent;
+    background-size: 220% 220%;
+    @apply animate-gradient-shift;
+  }
+
+  /* Document / legal style mono label */
+  .doc-label {
+    @apply font-mono text-[0.68rem] uppercase tracking-[0.32em] text-sky-light/70;
+  }
+
+  /* Pill button base */
+  .btn {
+    @apply relative inline-flex items-center justify-center gap-2 rounded-full px-7 py-3.5
+      font-body text-sm font-semibold tracking-wide transition-all duration-300
+      focus-visible:outline-none disabled:cursor-not-allowed disabled:opacity-60;
+  }
+
+  .btn-primary {
+    @apply btn text-white shadow-glow-rose;
+    background-image: linear-gradient(120deg, #ff4d6d, #c41e3a 55%, #8c0f24);
+  }
+  .btn-primary:hover {
+    @apply -translate-y-0.5 shadow-[0_0_60px_-8px_rgba(255,77,109,0.85)];
+  }
+
+  .btn-sky {
+    @apply btn text-ink-900 shadow-glow-sky;
+    background-image: linear-gradient(120deg, #7df0ff, #38bdf8 55%, #1f7fb8);
+  }
+  .btn-sky:hover {
+    @apply -translate-y-0.5 shadow-[0_0_60px_-8px_rgba(56,189,248,0.85)];
+  }
+
+  .btn-ghost {
+    @apply btn border border-white/20 bg-white/[0.04] text-cream/85 backdrop-blur;
+  }
+  .btn-ghost:hover {
+    @apply border-white/35 bg-white/[0.08] text-white;
+  }
+
+  /* Hairline divider with romance gradient */
+  .rule {
+    @apply h-px w-full border-0 bg-gradient-to-r from-transparent via-white/25 to-transparent;
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+  .text-pretty {
+    text-wrap: pretty;
+  }
+  /* Devanagari helpers */
+  .ne {
+    @apply font-deva;
+  }
+  .ne-serif {
+    @apply font-devaSerif;
+  }
+}
