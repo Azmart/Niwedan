@@ -1,8 +1,18 @@
+import { useRef } from 'react'
+import { motion, useScroll, useTransform, useReducedMotion } from 'framer-motion'
 import Reveal from './Reveal.jsx'
 import SectionLabel from './SectionLabel.jsx'
 import { theCase } from '../data/content.js'
 
 export default function TheCase() {
+  const reduce = useReducedMotion()
+  const railRef = useRef(null)
+  const { scrollYProgress } = useScroll({
+    target: railRef,
+    offset: ['start 85%', 'end 55%'],
+  })
+  const railScaleY = useTransform(scrollYProgress, [0, 1], [0, 1])
+
   return (
     <section
       id="case"
@@ -23,9 +33,20 @@ export default function TheCase() {
         </p>
       </Reveal>
 
-      <ol className="relative mt-12 space-y-4 border-l border-white/10 pl-6 sm:pl-8">
+      <ol ref={railRef} className="relative mt-12 space-y-4 pl-6 sm:pl-8">
+        {/* timeline rail: faint track + gradient that draws on scroll */}
+        <span
+          aria-hidden="true"
+          className="pointer-events-none absolute left-0 top-0 h-full w-px bg-white/10"
+        />
+        <motion.span
+          aria-hidden="true"
+          style={reduce ? undefined : { scaleY: railScaleY }}
+          className="pointer-events-none absolute left-0 top-0 h-full w-px origin-top bg-gradient-to-b from-romance-rose via-romance-rose to-sky"
+        />
+
         {theCase.points.map((p, idx) => (
-          <Reveal as="li" key={p.no} delay={idx * 0.08}>
+          <Reveal as="li" key={p.no} delay={idx * 0.08} x={-20}>
             <div className="group relative">
               {/* node on the rail */}
               <span

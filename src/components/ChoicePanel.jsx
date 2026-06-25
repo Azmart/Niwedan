@@ -154,7 +154,7 @@ export default function ChoicePanel() {
               Close · बन्द गर्नुहोस्
             </button>
             <p className="mt-4 font-mono text-[0.58rem] uppercase tracking-[0.2em] text-cream/35">
-              Only a confirmation is sent — never any personal information.
+              The only thing ever shared is which option you picked — never anything personal.
             </p>
           </div>
         )}

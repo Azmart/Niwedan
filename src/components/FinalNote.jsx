@@ -1,4 +1,5 @@
 import Reveal from './Reveal.jsx'
+import Parallax from './Parallax.jsx'
 import SectionLabel from './SectionLabel.jsx'
 import { finalNote } from '../data/content.js'
 
@@ -8,13 +9,18 @@ export default function FinalNote() {
       id="final"
       className="relative mx-auto w-full max-w-3xl scroll-mt-16 px-5 py-20 sm:py-28"
     >
-      <Reveal>
+      <Reveal y={40} scale>
         <div className="glass-strong relative overflow-hidden p-8 text-center sm:p-12">
-          {/* soft top glow */}
-          <div
-            aria-hidden="true"
-            className="absolute -top-24 left-1/2 h-48 w-48 -translate-x-1/2 rounded-full bg-romance-gradient opacity-25 blur-3xl"
-          />
+          {/* soft top glow (drifts on scroll) */}
+          <Parallax
+            distance={40}
+            className="pointer-events-none absolute -top-24 left-1/2 -ml-24 h-48 w-48"
+          >
+            <div
+              aria-hidden="true"
+              className="h-full w-full rounded-full bg-romance-gradient opacity-25 blur-3xl"
+            />
+          </Parallax>
 
           <div className="flex justify-center">
             <SectionLabel>{finalNote.label}</SectionLabel>

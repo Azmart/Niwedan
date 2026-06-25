@@ -32,7 +32,7 @@ function Meter({ score, tone }) {
           style={{ background: tones[tone].fill }}
           initial={reduce ? { width: `${score}%` } : { width: 0 }}
           whileInView={{ width: `${score}%` }}
-          viewport={{ once: true, amount: 0.6 }}
+          viewport={{ once: false, amount: 0.6 }}
           transition={{ duration: 1.1, ease: [0.22, 1, 0.36, 1] }}
         />
       </div>
@@ -62,7 +62,7 @@ export default function Evidence() {
 
       <div className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
         {evidence.exhibits.map((x, idx) => (
-          <Reveal key={x.tag} delay={idx * 0.08}>
+          <Reveal key={x.tag} delay={idx * 0.08} x={idx % 2 === 0 ? -32 : 32} scale>
             <article className="glass flex h-full flex-col p-6 transition duration-300 hover:-translate-y-1 hover:border-white/20">
               <div className="flex items-center justify-between">
                 <span className="font-mono text-[0.6rem] uppercase tracking-[0.22em] text-cream/50">

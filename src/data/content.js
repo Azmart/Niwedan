@@ -212,7 +212,7 @@ export const footer = {
   lineEn: 'Consent required. The law of respect remains undefeated.',
   lineNe: 'अनुमति अनिवार्य। आदरको नियम सधैं अपराजित।',
   privacyEn:
-    'No personal information is collected. Choosing an option only sends a small confirmation message — nothing about you.',
+    'The only thing ever shared is which option you picked — never anything personal.',
   privacyNe:
-    'कुनै व्यक्तिगत जानकारी संकलन गरिँदैन। कुनै विकल्प छान्दा केवल एउटा सानो पुष्टि-सन्देश जान्छ — तपाईंको बारेमा केही होइन।',
+    'साझा हुने एउटै कुरा भनेको तपाईंले छानेको विकल्प मात्र हो — व्यक्तिगत केही पनि होइन।',
 }

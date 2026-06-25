@@ -1,9 +1,30 @@
-import { motion, useReducedMotion } from 'framer-motion'
+import { useRef } from 'react'
+import {
+  motion,
+  useReducedMotion,
+  useScroll,
+  useTransform,
+} from 'framer-motion'
 import PhotoFrame from './PhotoFrame.jsx'
 import { hero, meta } from '../data/content.js'
 
 export default function Hero() {
   const reduce = useReducedMotion()
+  const heroRef = useRef(null)
+  const { scrollYProgress } = useScroll({
+    target: heroRef,
+    offset: ['start start', 'end start'],
+  })
+
+  // Hero drifts as you scroll away — text lifts and fades, the frame sinks and
+  // tilts, the scroll cue disappears. Depth, not distraction.
+  const textY = useTransform(scrollYProgress, [0, 1], [0, -80])
+  const textOpacity = useTransform(scrollYProgress, [0, 0.7], [1, 0])
+  const frameY = useTransform(scrollYProgress, [0, 1], [0, 100])
+  const frameRotate = useTransform(scrollYProgress, [0, 1], [0, -6])
+  const cueOpacity = useTransform(scrollYProgress, [0, 0.25], [1, 0])
+  const sx = (style) => (reduce ? undefined : style)
+
   const rise = (delay) => ({
     initial: reduce ? { opacity: 0 } : { opacity: 0, y: 26 },
     animate: { opacity: 1, y: 0 },
@@ -12,12 +33,16 @@ export default function Hero() {
 
   return (
     <header
+      ref={heroRef}
       id="top"
       className="relative mx-auto flex min-h-[100svh] w-full max-w-6xl flex-col justify-start px-5 pb-16 pt-28 lg:justify-center lg:py-20"
     >
       <div className="grid items-center gap-12 lg:grid-cols-[1.15fr_0.85fr]">
         {/* Left — the filing */}
-        <div className="text-center lg:text-left">
+        <motion.div
+          style={sx({ y: textY, opacity: textOpacity })}
+          className="text-center lg:text-left"
+        >
           <motion.div
             {...rise(0)}
             className="mb-6 inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/[0.05] px-4 py-1.5 backdrop-blur"
@@ -78,33 +103,39 @@ export default function Hero() {
             <span aria-hidden="true">·</span>
             <span>Status: Awaiting verdict</span>
           </motion.div>
-        </div>
+        </motion.div>
 
         {/* Right — the exhibit */}
         <motion.div
-          initial={reduce ? { opacity: 0 } : { opacity: 0, scale: 0.9, y: 20 }}
-          animate={{ opacity: 1, scale: 1, y: 0 }}
-          transition={{ duration: 0.9, delay: 0.3, ease: [0.22, 1, 0.36, 1] }}
+          style={sx({ y: frameY, rotate: frameRotate })}
           className="flex justify-center lg:justify-end"
         >
-          <PhotoFrame />
+          <motion.div
+            initial={reduce ? { opacity: 0 } : { opacity: 0, scale: 0.9, y: 20 }}
+            animate={{ opacity: 1, scale: 1, y: 0 }}
+            transition={{ duration: 0.9, delay: 0.3, ease: [0.22, 1, 0.36, 1] }}
+          >
+            <PhotoFrame />
+          </motion.div>
         </motion.div>
       </div>
 
       {/* Scroll hint */}
-      <motion.a
-        href="#case"
-        {...rise(0.7)}
-        className="group mx-auto mt-14 flex items-center gap-2 text-cream/55 transition hover:text-cream lg:mx-0"
-        aria-label={hero.scrollHint}
-      >
-        <span className="font-mono text-[0.6rem] uppercase tracking-[0.25em]">
-          {hero.scrollHint}
-        </span>
-        <span className="grid h-9 w-5 place-items-start justify-center rounded-full border border-white/25 pt-1.5">
-          <span className="block h-1.5 w-1 animate-float rounded-full bg-romance-rose" />
-        </span>
-      </motion.a>
+      <motion.div style={sx({ opacity: cueOpacity })}>
+        <motion.a
+          href="#case"
+          {...rise(0.7)}
+          className="group mx-auto mt-14 flex items-center gap-2 text-cream/55 transition hover:text-cream lg:mx-0"
+          aria-label={hero.scrollHint}
+        >
+          <span className="font-mono text-[0.6rem] uppercase tracking-[0.25em]">
+            {hero.scrollHint}
+          </span>
+          <span className="grid h-9 w-5 place-items-start justify-center rounded-full border border-white/25 pt-1.5">
+            <span className="block h-1.5 w-1 animate-float rounded-full bg-romance-rose" />
+          </span>
+        </motion.a>
+      </motion.div>
     </header>
   )
 }

@@ -1,4 +1,5 @@
 import Reveal from './Reveal.jsx'
+import Parallax from './Parallax.jsx'
 import SectionLabel from './SectionLabel.jsx'
 import Seal from './Seal.jsx'
 import { petition, meta } from '../data/content.js'
@@ -22,7 +23,7 @@ export default function Petition() {
       </Reveal>
 
       {/* The decree */}
-      <Reveal delay={0.12}>
+      <Reveal delay={0.12} y={40} scale>
         <article className="glass-strong relative mt-10 overflow-hidden p-7 sm:p-10">
           {/* corner ticks */}
           <span className="pointer-events-none absolute left-4 top-4 h-6 w-6 rounded-tl-lg border-l-2 border-t-2 border-white/20" />
@@ -79,7 +80,9 @@ export default function Petition() {
                 {meta.petitionerEn}
               </p>
             </div>
-            <Seal className="shrink-0 -rotate-6" />
+            <Parallax distance={20} className="shrink-0">
+              <Seal className="-rotate-6" />
+            </Parallax>
           </div>
         </article>
       </Reveal>
