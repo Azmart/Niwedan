@@ -8,6 +8,7 @@
     "apps/*"
   ],
   "scripts": {
+    "prebuild": "node scripts/clean-dist.js",
     "dev": "concurrently --kill-others-on-fail --names gallery,niwedan,flowers \"npm run dev:gallery\" \"npm run dev:niwedan\" \"npm run dev:flowers\"",
     "dev:gallery": "npm run dev --workspace @niwedan/gallery",
     "dev:niwedan": "npm run dev --workspace @niwedan/niwedan",
@@ -16,6 +17,7 @@
     "build:gallery": "npm run build --workspace @niwedan/gallery",
     "build:niwedan": "npm run build --workspace @niwedan/niwedan",
     "build:flowers": "npm run build --workspace @niwedan/flower-field",
+    "test": "node --test tests/*.test.js",
     "preview": "npm run preview:gallery",
     "preview:gallery": "npm run preview --workspace @niwedan/gallery",
     "preview:niwedan": "npm run preview --workspace @niwedan/niwedan"

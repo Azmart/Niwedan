@@ -100,22 +100,23 @@ Almost everything is editable in one place: **[`apps/niwedan/src/data/content.js
 
 ## 🔔 Get a ping when she answers
 
-The site is static, so it can't "remember" a click for you — there's no shared
-database. To actually find out, the click has to send a signal somewhere you
-can see. The lazy, no-backend way is a **Discord webhook**:
+The site sends an opt-in choice to a small serverless endpoint, which then posts
+to Discord. The webhook URL remains a server-side secret:
 
 1. Discord → your channel → **Edit Channel → Integrations → Webhooks → New
    Webhook → Copy URL**.
-2. Copy `.env.example` to `.env` and paste the URL into `VITE_DISCORD_WEBHOOK_URL`.
-3. On Netlify/Vercel, add the same variable in the dashboard's env settings, then
-   redeploy.
+2. Copy `.env.example` to `.env` and paste the URL into `DISCORD_WEBHOOK_URL`.
+3. On Netlify, make that variable available to Functions or all scopes; on
+   Vercel, add it as a server-side environment variable. Then redeploy.
+
+Plain `npm run dev` serves only the Vite apps; use `netlify dev` for local
+end-to-end notification testing.
 
 Now "Permission Granted" and "Send HD Version First" each post a message to your
 Discord. Leave it unset and the buttons just show their friendly on-screen
-messages — no ping, no error. (Heads up: a client-side webhook URL is visible in
-the shipped JavaScript. For a personal page that's fine; if you'd rather hide it,
-move the `fetch` in `apps/niwedan/src/lib/notify.js` behind a Netlify/Vercel serverless
-function with the URL as a server-side secret.)
+messages — no ping, no error. The endpoint only accepts the two deliberate
+choices, keeps the webhook out of the shipped JavaScript, and Netlify rate-limits
+requests per visitor and domain.
 
 ## 🎵 Music
 
@@ -129,9 +130,11 @@ start time via `START_AT` in
 
 ## ☁️ Deployment
 
-The workspace currently builds two static SPAs into one `dist/` directory: the
-Gallery at `/` and Niwedan at `/apps/niwedan/`. Any static host with the supplied
-per-app SPA rewrites can serve it. Two easy options:
+The workspace builds three static SPAs into one `dist/` directory: the Gallery
+at `/`, Niwedan at `/apps/niwedan/`, and Flower Field at
+`/apps/flower-field/`, plus one optional serverless notification endpoint.
+Netlify and Vercel can serve the supplied per-app SPA rewrites and endpoint.
+Two easy options:
 
 ### Vercel
 
@@ -151,7 +154,7 @@ vercel --prod   # production deploy
 
 **Dashboard:** "Add new site" → "Import an existing project," pick the repo.
 Settings are read from `netlify.toml` (build `npm run build`, publish `dist`,
-plus Gallery and Niwedan SPA redirects). Click **Deploy**.
+plus Gallery, Niwedan, and Flower Field SPA redirects). Click **Deploy**.
 
 **CLI:**
 
@@ -161,9 +164,10 @@ netlify deploy            # draft deploy
 netlify deploy --prod     # production deploy
 ```
 
-> The apps currently deploy as static files. The only optional setting is
-> `VITE_DISCORD_WEBHOOK_URL` (see "Get a ping when she answers"); without it,
-> nothing else needs configuring for the current implementation.
+> The three apps deploy as static files plus one optional serverless
+> notification endpoint. Its only optional setting is `DISCORD_WEBHOOK_URL`
+> (see "Get a ping when she answers"); without it, nothing else needs
+> configuring for the current implementation.
 
 ## 📦 Dependencies added
 
