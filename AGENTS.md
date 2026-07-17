@@ -95,3 +95,65 @@ desktop widths.
   modal still tells her nothing is sent on her behalf; keep that honest (it's the
   petitioner's own notification of her answer, not background surveillance).
 - Keep it a static SPA deployable to Netlify/Vercel with no env vars.
+
+# Agent Execution Protocol & Architecture Framework
+
+This protocol establishes a strict, token-efficient Orchestrator-Worker pattern for all engineering, refactoring, and feature development tasks in this workspace.
+
+---
+
+## 👑 Tier 1: The Orchestrator (Flagship Reasoning)
+*Examples: GPT-5.6 Sol, Claude 3.5/4 Opus, Custom High-Reasoning Engines*
+
+### Objective
+Act exclusively as the Lead Architect and Systems Planner. Focus on structural integrity, cross-module dependencies, and state management.
+
+### Rules of Engagement
+1. **Never Write Boilerplate:** Do not generate repetitive, low-level execution code or large copy-pasted files.
+2. **Context Preservation:** Keep the conversation high-level to avoid hitting token-accumulation thresholds.
+3. **Task Decomposition:** Break down massive architectural goals into atomic, isolated changes.
+4. **Output Format:** For any implementation step, output a standalone, self-contained prompt block explicitly labeled: `[WORKER INSTRUCTION: <Target File/Module>]`.
+
+---
+
+## 🛠️ Tier 2: The Builder (Balanced Generalist)
+*Examples: GPT-5.6 Terra, Claude 3.5 Sonnet, Fable*
+
+### Objective
+Execute multi-file modifications, complex feature implementations, and localized refactoring blocks.
+
+### Rules of Engagement
+1. **Scope Bounding:** Read and modify *only* the specific files or modules explicitly targeted in the worker instruction.
+2. **Defensive Coding:** Maintain existing style patterns, loading skeletons, error boundaries, and type safety constraints found in the workspace.
+3. **Feedback Loop:** If a task requires global structural changes not specified in the instruction, stop and refer back to Tier 1.
+
+---
+
+## ⚡ Tier 3: The Runner (Fast Utility)
+*Examples: GPT-5.6 Luna, Claude 3.5 Haiku*
+
+### Objective
+Handle high-velocity, repetitive, or isolated single-file tasks.
+
+### Rules of Engagement
+1. **Target Actions:** Execute unit tests, write simple utility functions, generate documentation, or perform straightforward string/syntax adjustments.
+2. **Zero Overhead:** Do not attempt architectural planning. If context grows large, request a thread flush.
+
+---
+
+## 🔄 Standard Execution Loop (Multi-Thread Protocol)
+
+When executing any complex workspace modification:
+
+1. **Phase 1: Blueprinting (Tier 1)**
+   - Pass the global goal to a High Reasoning / Flagship model thread.
+   - **Output Expectation:** A step-by-step master plan and the first `[WORKER INSTRUCTION]` block.
+
+2. **Phase 2: Execution Delegation (Tier 2 / Tier 3)**
+   - Copy the `[WORKER INSTRUCTION]` block.
+   - Open a fresh, scoped chat thread (or use an inline file-editing agent) using a Balanced or Fast model.
+   - Pass *only* the targeted files into this thread to minimize token consumption.
+   - Apply the generated code to the local workspace.
+
+3. **Phase 3: Verification**
+   - Provide the execution diff or test logs back to Tier 1 to clear the step and generate the next instruction block.

@@ -3,5 +3,17 @@
   "framework": "vite",
   "buildCommand": "npm run build",
   "outputDirectory": "dist",
-  "rewrites": [{ "source": "/(.*)", "destination": "/index.html" }]
+  "headers": [{
+    "source": "/(.*)",
+    "headers": [
+      { "key": "X-Robots-Tag", "value": "noindex, nofollow, noarchive, nosnippet" },
+      { "key": "X-Content-Type-Options", "value": "nosniff" },
+      { "key": "Referrer-Policy", "value": "no-referrer" }
+    ]
+  }],
+  "rewrites": [
+    { "source": "/apps/niwedan/(.*)", "destination": "/apps/niwedan/index.html" },
+    { "source": "/apps/flower-field/(.*)", "destination": "/apps/flower-field/index.html" },
+    { "source": "/(.*)", "destination": "/index.html" }
+  ]
 }

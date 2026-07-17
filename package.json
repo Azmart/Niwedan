@@ -1,27 +1,29 @@
 {
-  "name": "niwedan",
+  "name": "niwedan-workspace",
   "private": true,
   "version": "1.0.0",
-  "description": "Niwedan — an Official Gallery Access Request. A playful, respectful, bilingual (Nepali/English) micro-site that charmingly asks for permission to save one photo.",
+  "description": "Workspace for the Niwedan app collection.",
   "type": "module",
+  "workspaces": [
+    "apps/*"
+  ],
   "scripts": {
-    "dev": "vite",
-    "build": "vite build",
-    "preview": "vite preview"
+    "dev": "concurrently --kill-others-on-fail --names gallery,niwedan,flowers \"npm run dev:gallery\" \"npm run dev:niwedan\" \"npm run dev:flowers\"",
+    "dev:gallery": "npm run dev --workspace @niwedan/gallery",
+    "dev:niwedan": "npm run dev --workspace @niwedan/niwedan",
+    "dev:flowers": "npm run dev --workspace @niwedan/flower-field",
+    "build": "npm run build:gallery && npm run build:niwedan && npm run build:flowers",
+    "build:gallery": "npm run build --workspace @niwedan/gallery",
+    "build:niwedan": "npm run build --workspace @niwedan/niwedan",
+    "build:flowers": "npm run build --workspace @niwedan/flower-field",
+    "preview": "npm run preview:gallery",
+    "preview:gallery": "npm run preview --workspace @niwedan/gallery",
+    "preview:niwedan": "npm run preview --workspace @niwedan/niwedan"
   },
   "engines": {
-    "node": ">=18"
-  },
-  "dependencies": {
-    "framer-motion": "^11.0.0",
-    "react": "^18.3.1",
-    "react-dom": "^18.3.1"
+    "node": ">=20"
   },
   "devDependencies": {
-    "@vitejs/plugin-react": "^4.3.4",
-    "autoprefixer": "^10.4.20",
-    "postcss": "^8.4.49",
-    "tailwindcss": "^3.4.17",
-    "vite": "^6.0.7"
+    "concurrently": "^9.2.4"
   }
 }

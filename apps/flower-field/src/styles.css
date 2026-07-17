@@ -1,0 +1,117 @@
+:root{font-family:Inter,system-ui,sans-serif;color:#fff8ed;background:#162444;font-synthesis:none}
+*{box-sizing:border-box}
+body{min-width:320px;min-height:100vh;margin:0;overflow-x:hidden}
+button,a{font:inherit}
+:focus-visible{outline:3px solid #fff0a6;outline-offset:4px}
+.app{min-height:100svh;overflow:hidden;background:linear-gradient(#17274b,#46618b 45%,#28534e 72%,#14313a)}
+.skip{position:fixed;top:1rem;left:1rem;z-index:20;padding:.7rem 1rem;border-radius:99px;background:#fff8ed;color:#172442;font-weight:700;text-decoration:none;transform:translateY(-200%)}
+.skip:focus{transform:none}
+header{position:relative;z-index:8;display:flex;justify-content:space-between;gap:1rem;width:min(calc(100% - 2rem),75rem);margin:auto;padding:1rem 0}
+.home{display:grid;color:#fff9ee;font-size:.76rem;font-weight:700;text-decoration:none;text-shadow:0 1px 5px #0b1730}
+.home small{margin-left:1rem;color:#d3e4cf;font-size:.63rem;font-weight:500}
+.counter{margin:0;color:#f6dfaa;font-size:.72rem;letter-spacing:.06em;text-transform:uppercase}
+.counter b{font:700 1.7rem/1 Georgia,serif}
+.intro{position:relative;z-index:4;width:min(calc(100% - 2rem),48rem);margin:clamp(1rem,4vh,3.5rem) auto 0;text-align:center;text-shadow:0 2px 10px #111b35aa}
+.intro>p{margin:0 0 .7rem;color:#f8dc99;font-size:.63rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase}
+.intro h1{max-width:20ch;margin:auto;font:500 clamp(2rem,7vw,4.5rem)/.98 Georgia,serif;letter-spacing:-.045em}
+.intro em{color:#ffd5d4}
+.intro>span{display:block;margin:1rem auto 0;color:#d7e5d3;font-size:clamp(.78rem,2vw,.95rem);line-height:1.5}
+.meadow{position:relative;min-height:49svh;margin-top:.8rem;touch-action:pan-y;user-select:none;cursor:crosshair;background:radial-gradient(circle at 74% 20%,#fff2bb 0 1.3rem,#ffe2a945 1.6rem 3.4rem,transparent 6rem),linear-gradient(180deg,#30457988,transparent 55%)}
+.moon{position:absolute;z-index:1;top:14%;left:74%;width:2rem;aspect-ratio:1;border-radius:50%;background:#fff3c4;box-shadow:0 0 2rem #ffe59f82}
+.stars{position:absolute;z-index:1;inset:0 0 52%;pointer-events:none}
+.stars i{position:absolute;width:.35rem;aspect-ratio:1;background:#fff8c9;clip-path:polygon(50% 0,61% 38%,100% 50%,61% 62%,50% 100%,39% 62%,0 50%,39% 38%);filter:drop-shadow(0 0 .28rem #fff5aa);animation:star-in .65s ease-out both,twinkle 2.8s ease-in-out infinite;animation-delay:var(--star-delay),calc(var(--star-delay) + .65s)}
+.hills{position:absolute;inset:auto 0 0;height:62%;border-radius:50% 50% 0 0}
+.far{bottom:25%;background:radial-gradient(ellipse at 15% 100%,#203d4b,transparent 46%),radial-gradient(ellipse at 70% 100%,#294b54,transparent 51%)}
+.near{height:50%;background:radial-gradient(ellipse at 30% 100%,#1f4a50,transparent 54%),radial-gradient(ellipse at 85% 100%,#254b45,transparent 48%),linear-gradient(#2c5b4f,#17353b)}
+.garden{position:absolute;z-index:2;inset:0;transition:transform 120ms ease-out}
+.flower{position:absolute;width:clamp(4rem,8vw,5.8rem);height:clamp(6.4rem,13vw,9.4rem);transform:translate(-50%,-78%);filter:drop-shadow(0 .25rem .2rem #0c27334a)}
+.flower svg{width:100%;height:100%;overflow:visible}
+.rose svg{transform:scale(1.2);transform-origin:50% 100%}
+.stem-line{fill:none;stroke:#3f854c;stroke-width:5;stroke-linecap:round;stroke-dasharray:1;stroke-dashoffset:1;animation:stem-grow .48s cubic-bezier(.33,.8,.38,1) both}
+.flower-leaf,.rose-leaf,.poppy-leaf{transform-box:fill-box;opacity:0;animation:leaf-unfurl .42s .3s cubic-bezier(.2,.8,.25,1) both}
+.flower-leaf{fill:#5fa65c;stroke:#285d3d;stroke-width:1.4}
+.leaf-left{transform-origin:100% 50%}
+.leaf-right{fill:#79b969;transform-origin:0 50%;animation-delay:.38s}
+.rose-leaf{fill:#397c43;stroke:#204f35;stroke-width:1.4}
+.thorn{fill:none;stroke:#28603b;stroke-width:2;stroke-linecap:round;stroke-dasharray:24;stroke-dashoffset:24;animation:thorn-in .25s .36s ease-out both}
+.flower-head{transform-box:fill-box;transform-origin:50% 100%;opacity:0;animation:head-bloom .72s .42s cubic-bezier(.18,.85,.24,1) both,flower-sway 4.8s 1.2s ease-in-out infinite alternate}
+.flower-center,.flower-detail{transform-box:fill-box;transform-origin:center;opacity:0;animation:detail-in .35s .83s ease-out both}
+.rose-head{transform-origin:50% 100%}
+.rose-sepals{fill:none;stroke:#6f243b;stroke-width:2;stroke-linecap:round}
+.rose-cup{fill:#8c173b;stroke:#62112d;stroke-width:1.8}
+.rose-outer{fill:#bd2452;stroke:#781333;stroke-width:1.8}
+.rose-left{fill:#c92a58}.rose-right{fill:#ad1948}.rose-top{fill:#d73361}
+.rose-middle{fill:#ee5275;stroke:#9b1d43;stroke-width:1.5;transform-box:fill-box;transform-origin:center;animation:petal-layer .3s .63s ease-out both}
+.rose-fold-left{fill:#e8446b}.rose-fold-right{fill:#f15b7d;animation-delay:.69s}
+.rose-inner{fill:#f77792;stroke:#b7274d;stroke-width:1.35;transform-box:fill-box;transform-origin:center;animation:petal-layer .3s .77s ease-out both}
+.rose-spiral{fill:none;stroke:#a7224b;stroke-width:1.35;stroke-linecap:round;stroke-linejoin:round;animation:detail-in .28s .9s ease-out both}
+.daisy-petals,.sunflower-petals,.cosmos-petals{transform-origin:50% 100%}
+.daisy-petals ellipse{fill:#fff8e6;stroke:#efd5bc;stroke-width:1.2}
+.daisy-center{fill:#f2b83f;stroke:#bb7428;stroke-width:2}
+.daisy-dot{fill:#fff0a1}
+.tulip-head{fill:#f56f9b;stroke:#a72f62;stroke-width:2;transform-origin:50% 100%}
+.tulip-highlight{fill:none;stroke:#ffc2d0;stroke-width:2;stroke-linecap:round}
+.cosmos-petals path{fill:#ff9bc8;stroke:#b84683;stroke-width:1.5}
+.cosmos-center{fill:#f8c84f;stroke:#a8662b;stroke-width:2}
+.poppy-head{fill:#ee684e;stroke:#ae372f;stroke-width:2;transform-origin:50% 100%}
+.poppy-head path:last-child{fill:none;stroke:#ffb08a;stroke-width:1.5}
+.poppy-center{fill:#283439}
+.poppy-cap{fill:none;stroke:#191f28;stroke-width:3}
+.poppy-leaf{fill:#4b9250;stroke:#286039;stroke-width:1.4}
+.bell-branch{fill:none;stroke:#3f854c;stroke-width:3;stroke-linecap:round;stroke-dasharray:1;stroke-dashoffset:1;animation:stem-grow .3s .28s ease-out both}
+.bell-head{fill:#9c8de2;stroke:#5d4aaf;stroke-width:2;transform-origin:50% 100%}
+.bell-head path:last-child{fill:none;stroke:#dbd1ff;stroke-width:1.5}
+.bell-bud{fill:#8573ce;stroke:#5845a8;stroke-width:1.4}
+.sunflower-petals ellipse{fill:#ffca48;stroke:#d78a27;stroke-width:1.2}
+.sunflower-center{fill:#744025;stroke:#4d2a20;stroke-width:2}
+.sunflower-seeds{fill:none;stroke:#c58a48;stroke-width:2;stroke-dasharray:2 3}
+.fireflies{position:absolute;z-index:3;inset:40% 0 0;pointer-events:none}
+.fireflies i{position:absolute;width:.32rem;height:.32rem;border-radius:50%;background:#fff4ab;box-shadow:0 0 .8rem .2rem #ffef9590;animation:float 4s ease-in-out infinite alternate}
+.fireflies i:nth-child(1){left:12%;top:25%}
+.fireflies i:nth-child(2){left:35%;top:54%;animation-delay:-2s}
+.fireflies i:nth-child(3){left:58%;top:16%;animation-delay:-1s}
+.fireflies i:nth-child(4){left:75%;top:51%;animation-delay:-3s}
+.fireflies i:nth-child(5){left:90%;top:29%;animation-delay:-1.5s}
+.fireflies i:nth-child(6){left:47%;top:72%;animation-delay:-2.5s}
+.hint{position:absolute;z-index:4;bottom:1.2rem;left:50%;width:min(calc(100% - 2rem),38rem);margin:0;padding:.8rem 1rem;border:1px solid #fff3d34d;border-radius:1rem;background:#13253d99;color:#fff9e9;font:600 clamp(.72rem,2.5vw,.88rem)/1.45 Georgia,serif;text-align:center;transform:translateX(-50%);backdrop-filter:blur(8px)}
+.hint span{display:block;margin-top:.2rem;color:#d3ead0;font:600 .64rem/1.3 Inter,sans-serif;letter-spacing:.08em;text-transform:uppercase}
+.final{position:absolute;z-index:6;top:50%;left:50%;width:min(calc(100% - 2rem),38rem);padding:clamp(1.35rem,4vw,2.4rem);border:1px solid #fff2bb82;border-radius:1.5rem;background:#182b3ad9;box-shadow:0 1.5rem 5rem #0b1728a8;text-align:center;transform:translate(-50%,-50%);backdrop-filter:blur(12px);animation:note .7s ease-out both}
+.final-close{position:absolute;top:.65rem;right:.65rem;display:grid;place-items:center;width:2.75rem;height:2.75rem;padding:0;border:1px solid #fff2bb8c;border-radius:50%;background:#ffffff16;color:#fff9e9;cursor:pointer;font-size:1.8rem;line-height:1;transition:background .18s ease,transform .18s ease,border-color .18s ease}
+.final-close:hover{border-color:#fff4bf;background:#ffffff2c;transform:scale(1.07)}
+.final-close:active{transform:scale(.96)}
+.final-close:focus-visible{outline-color:#fff0a6;outline-offset:3px}
+.final-close span{display:block;transform:translateY(-.08em)}
+.final>i{color:#ffe995;font-size:1.5rem}
+.final h2{margin:.4rem auto .8rem;font:500 clamp(1.6rem,5vw,2.7rem)/1 Georgia,serif}
+.final p{margin:.65rem auto 0;color:#f3eee1;font-size:.84rem;line-height:1.5}
+.final p:last-child{color:#d1e4ce}
+.done .near{filter:saturate(1.35) brightness(1.12)}
+.controls{position:relative;z-index:7;display:grid;justify-items:center;gap:.5rem;width:min(calc(100% - 2rem),34rem);margin:-1.4rem auto 1.5rem;padding:1rem;border:1px solid #fff1ce38;border-radius:1.15rem;background:#152940bb;text-align:center;backdrop-filter:blur(9px)}
+.controls p{margin:0;color:#d9ead5;font:italic .83rem Georgia,serif}
+.controls button{padding:.72rem 1.05rem;border:0;border-radius:99px;background:linear-gradient(135deg,#fff0bd,#eab7b6);color:#3e2030;font-size:.8rem;font-weight:800;box-shadow:0 .45rem 1rem #0d1e343b}
+.controls button:disabled{opacity:.75}
+.controls small{color:#bcd5c1;font-size:.7rem}
+@keyframes stem-grow{to{stroke-dashoffset:0}}
+@keyframes leaf-unfurl{from{opacity:0;transform:scaleX(.08) rotate(-10deg)}to{opacity:1;transform:scaleX(1) rotate(0)}}
+@keyframes thorn-in{to{stroke-dashoffset:0}}
+@keyframes head-bloom{0%{opacity:0;transform:translateY(11px) scale(.2,.3)}55%{opacity:1;transform:translateY(0) scale(.88,1.03)}100%{opacity:1;transform:translateY(0) scale(1)}}
+@keyframes petal-layer{from{opacity:0;transform:scale(.5)}to{opacity:1;transform:scale(1)}}
+@keyframes detail-in{from{opacity:0;transform:scale(.35)}to{opacity:1;transform:scale(1)}}
+@keyframes flower-sway{from{transform:rotate(-1.2deg)}to{transform:rotate(1.2deg)}}
+@keyframes star-in{from{opacity:0;transform:scale(0) rotate(-30deg)}
+to{opacity:1;transform:scale(1) rotate(0)}
+}
+@keyframes twinkle{50%{opacity:.55;transform:scale(.65)}
+}
+@keyframes float{to{transform:translate(1.4rem,-1rem);opacity:.35}
+}
+@keyframes note{from{opacity:0;transform:translate(-50%,-43%) scale(.92)}
+to{opacity:1;transform:translate(-50%,-50%) scale(1)}
+}
+@media(min-width:45rem){.meadow{min-height:58svh}
+header{padding-top:1.5rem}
+.controls{margin-top:-1.8rem}
+}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;animation-delay:0ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}
+.garden{transition:none}
+}

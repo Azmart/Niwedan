@@ -40,6 +40,13 @@ export default function App() {
         Skip to content
       </a>
 
+      <a
+        href="/"
+        className="fixed right-4 top-4 z-[60] rounded-full border border-cream/20 bg-ink-900/75 px-4 py-2 text-xs font-medium text-cream shadow-lg backdrop-blur transition hover:border-romance-300/70 hover:text-romance-100 focus:outline-none focus-visible:ring-2 focus-visible:ring-romance-300"
+      >
+        ← Back to our archive <span className="ne">/ हाम्रो संग्रह</span>
+      </a>
+
       <main className="relative z-10">
         <Hero />
         <TheCase />

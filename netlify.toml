@@ -1,4 +1,4 @@
-# Netlify deploy configuration for Niwedan (Vite SPA)
+# Netlify deploy configuration for the gallery workspace.
 [build]
   command = "npm run build"
   publish = "dist"
@@ -6,8 +6,25 @@
 [build.environment]
   NODE_VERSION = "20"
 
-# Single-page app: serve index.html for every route
+# Niwedan remains a standalone SPA under its workspace path.
+[[redirects]]
+  from = "/apps/niwedan/*"
+  to = "/apps/niwedan/index.html"
+  status = 200
+
+[[redirects]]
+  from = "/apps/flower-field/*"
+  to = "/apps/flower-field/index.html"
+  status = 200
+
 [[redirects]]
   from = "/*"
   to = "/index.html"
   status = 200
+
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Robots-Tag = "noindex, nofollow, noarchive, nosnippet"
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "no-referrer"

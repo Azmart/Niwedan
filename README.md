@@ -1,4 +1,10 @@
-# निवेदन · Niwedan
+# Our Little Archive · हाम्रो सानो संग्रह
+
+A bilingual workspace for a growing collection of small, personal apps. The
+App Gallery lives at `/`; each chapter is built independently beneath `/apps/`.
+The first chapter is **Niwedan**.
+
+## App #1: निवेदन · Niwedan
 
 ### Official Gallery Access Request
 
@@ -8,7 +14,8 @@ politely requests the HD original in the inbox, because screenshotting a story
 "feels both illegal and disrespectful to the quality of the masterpiece."
 
 It is a tiny digital love letter dressed up as an official legal filing.
-Bilingual: **English + नेपाली**. No backend. No data collected. It just asks — nicely.
+Bilingual: **English + नेपाली**. The current app does not collect personal data;
+it just asks — nicely.
 
 > _"Temporary stories are not enough for permanent art."_
 
@@ -46,63 +53,50 @@ keeping the bundle light (~100 KB gzipped JS).
 
 ## 🚀 Getting started
 
-> Requires **Node 18+** (Node 20 recommended).
+> Requires **Node 20+**.
 
 ```bash
 npm install      # install dependencies
-npm run dev      # start the dev server → http://localhost:5173
-npm run build    # production build → dist/
-npm run preview  # preview the production build locally
+npm run dev      # start the Gallery → http://localhost:5173/
+npm run dev:niwedan # start Niwedan independently
+npm run build    # assemble Gallery + Niwedan → dist/
+npm run preview  # preview the assembled dist/ output
 ```
 
 ## 🗂️ Project structure
 
 ```
 .
-├── index.html                 # entry, fonts, meta
-├── src/
-│   ├── main.jsx               # React root
-│   ├── App.jsx                # layout: background layers + sections
-│   ├── index.css              # Tailwind layers + base theme + components
-│   ├── data/
-│   │   └── content.js         # ← ALL copy (EN + NE) lives here
-│   ├── lib/
-│   │   └── notify.js          # optional Discord webhook ping
-│   └── components/
-│       ├── MusicPlayer.jsx    # background music (loops from 1:34)
-│       ├── ParticleField.jsx  # canvas embers + hearts
-│       ├── CursorGlow.jsx     # pointer-following glow (desktop)
-│       ├── PhotoFrame.jsx     # floating placeholder "masterpiece"
-│       ├── Hero.jsx
-│       ├── TheCase.jsx
-│       ├── Evidence.jsx
-│       ├── Petition.jsx       # the official document + Exhibit Ø
-│       ├── ChoicePanel.jsx    # buttons, modal, appeal reveal
-│       ├── FinalNote.jsx      # consent-first closing
-│       ├── Footer.jsx
-│       ├── Modal.jsx          # accessible dialog
-│       ├── HeartBurst.jsx     # celebration hearts
-│       ├── Reveal.jsx         # scroll-into-view wrapper
-│       ├── SectionLabel.jsx   # document-style labels
-│       └── Seal.jsx           # SVG wax seal
-├── tailwind.config.js         # colors, fonts, keyframes
+├── apps/
+│   ├── gallery/              # collection shell at /
+│   │   ├── index.html
+│   │   ├── src/              # bilingual gallery UI and copy
+│   │   └── vite.config.js    # root dist/ build configuration
+│   └── niwedan/
+│       ├── index.html         # entry, fonts, meta
+│       ├── public/            # favicon + music
+│       ├── src/               # React app, copy, and components
+│       ├── tailwind.config.js # colors, fonts, keyframes
+│       └── vite.config.js     # /apps/niwedan/ build configuration
+├── package.json               # npm workspace orchestration
 ├── netlify.toml               # Netlify build + SPA redirect
 └── vercel.json                # Vercel build + SPA rewrite
 ```
 
 ## ✏️ Make it yours
 
-Almost everything is editable in one place: **[`src/data/content.js`](src/data/content.js)**.
+Almost everything is editable in one place: **[`apps/niwedan/src/data/content.js`](apps/niwedan/src/data/content.js)**.
 
 - **Change the wording / names** — edit the EN and NE strings there. The
   petitioner's name and Request ID live in the `meta` object at the top.
 - **Add the real photo** — open
-  [`src/components/PhotoFrame.jsx`](src/components/PhotoFrame.jsx) and replace the
-  abstract "artwork" `<div>` with an `<img>` (drop the file in `public/` and
-  reference it as `/your-photo.jpg`). The frame, tilt, and plaque stay as-is.
+  [`apps/niwedan/src/components/PhotoFrame.jsx`](apps/niwedan/src/components/PhotoFrame.jsx)
+  and replace the abstract "artwork" `<div>` with an `<img>` (drop the file in
+  `apps/niwedan/public/` and construct its URL with `import.meta.env.BASE_URL`).
+  The frame, tilt, and plaque stay as-is.
   _The repo intentionally ships with a placeholder — no private photos included._
 - **Tweak the colors** — adjust the `romance` / `sky` / `ink` palettes in
-  [`tailwind.config.js`](tailwind.config.js).
+  [`apps/niwedan/tailwind.config.js`](apps/niwedan/tailwind.config.js).
 
 ## 🔔 Get a ping when she answers
 
@@ -120,22 +114,24 @@ Now "Permission Granted" and "Send HD Version First" each post a message to your
 Discord. Leave it unset and the buttons just show their friendly on-screen
 messages — no ping, no error. (Heads up: a client-side webhook URL is visible in
 the shipped JavaScript. For a personal page that's fine; if you'd rather hide it,
-move the `fetch` in `src/lib/notify.js` behind a Netlify/Vercel serverless
+move the `fetch` in `apps/niwedan/src/lib/notify.js` behind a Netlify/Vercel serverless
 function with the URL as a server-side secret.)
 
 ## 🎵 Music
 
 On arrival she picks **Enter with music** or **Enter in silence** (a gate is the
 only reliable way to play audio — browsers block autoplay with sound until a
-click). The song (`public/music.m4a`) begins at **1:34** the first time it plays
+click). The song (`apps/niwedan/public/music.m4a`) begins at **1:34** the first time it plays
 and loops from the start after that. A floating button (bottom-right) is always
 there to mute/unmute. Swap the file (keep the name `music.m4a`) or change the
 start time via `START_AT` in
-[`src/components/MusicPlayer.jsx`](src/components/MusicPlayer.jsx).
+[`apps/niwedan/src/components/MusicPlayer.jsx`](apps/niwedan/src/components/MusicPlayer.jsx).
 
 ## ☁️ Deployment
 
-This is a static SPA — any static host works. Two easy options:
+The workspace currently builds two static SPAs into one `dist/` directory: the
+Gallery at `/` and Niwedan at `/apps/niwedan/`. Any static host with the supplied
+per-app SPA rewrites can serve it. Two easy options:
 
 ### Vercel
 
@@ -155,7 +151,7 @@ vercel --prod   # production deploy
 
 **Dashboard:** "Add new site" → "Import an existing project," pick the repo.
 Settings are read from `netlify.toml` (build `npm run build`, publish `dist`,
-plus an SPA redirect). Click **Deploy**.
+plus Gallery and Niwedan SPA redirects). Click **Deploy**.
 
 **CLI:**
 
@@ -165,8 +161,9 @@ netlify deploy            # draft deploy
 netlify deploy --prod     # production deploy
 ```
 
-> No backend required. The only optional setting is `VITE_DISCORD_WEBHOOK_URL`
-> (see "Get a ping when she answers"); without it, nothing needs configuring.
+> The apps currently deploy as static files. The only optional setting is
+> `VITE_DISCORD_WEBHOOK_URL` (see "Get a ping when she answers"); without it,
+> nothing else needs configuring for the current implementation.
 
 ## 📦 Dependencies added
 

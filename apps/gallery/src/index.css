@@ -1,0 +1,109 @@
+:root {
+  color: #eef1f7;
+  background: #0b111d;
+  font-family: Inter, system-ui, sans-serif;
+  font-synthesis: none;
+  color-scheme: dark;
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  min-width: 320px;
+  min-height: 100vh;
+  margin: 0;
+  background: radial-gradient(circle at 10% 5%, #a4365133, transparent 32rem), radial-gradient(circle at 90% 32%, #4c82a624, transparent 30rem), #0b111d;
+}
+body::before {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  background-image: linear-gradient(#ffffff06 1px, transparent 1px), linear-gradient(90deg, #ffffff06 1px, transparent 1px);
+  background-size: 44px 44px;
+  content: '';
+  mask-image: linear-gradient(to bottom, black, transparent 80%);
+}
+a { color: inherit; }
+[lang='ne'] { font-family: Hind, sans-serif; }
+.skip-link {
+  position: fixed;
+  top: 1rem;
+  left: 1rem;
+  z-index: 10;
+  padding: .7rem 1rem;
+  border-radius: 99px;
+  background: #f5e5df;
+  color: #26131c;
+  font-weight: 600;
+  transform: translateY(-180%);
+}
+.skip-link:focus { transform: translateY(0); }
+.site-shell { width: min(calc(100% - 2rem), 70rem); margin: auto; }
+.hero {
+  display: grid;
+  min-height: 72vh;
+  padding: 6rem 0 4rem;
+  text-align: center;
+  place-content: center;
+  justify-items: center;
+}
+.hero > * { min-width: 0; max-width: 100%; }
+.hero-mark {
+  display: grid;
+  width: 3.5rem;
+  height: 3.5rem;
+  margin-bottom: 1.5rem;
+  border: 1px solid #f5e5df47;
+  border-radius: 50%;
+  color: #efb1b7;
+  place-items: center;
+  box-shadow: 0 0 0 .45rem #a4365112;
+}
+.eyebrow, .section-heading p, .status { letter-spacing: .14em; text-transform: uppercase; }
+.eyebrow { margin: 0; color: #efb1b7; font-size: .67rem; font-weight: 600; }
+.eyebrow span, .section-heading p span { display: block; margin-top: .55rem; letter-spacing: .06em; text-transform: none; }
+h1, h2, p { text-wrap: balance; }
+h1, h2 { font-family: 'Cormorant Garamond', Georgia, serif; }
+h1 { max-width: 13ch; margin: 1.4rem 0 1rem; font-size: clamp(3.4rem, 10vw, 6.8rem); font-weight: 600; line-height: .85; letter-spacing: -.045em; }
+h1 span { display: block; margin-top: 1.35rem; color: #bdcde0; font-size: .32em; font-weight: 500; letter-spacing: 0; }
+.intro { max-width: 44rem; margin: 1.5rem 0 0; color: #aeb8c8; font-size: clamp(.95rem, 2vw, 1.08rem); line-height: 1.75; }
+.intro span, .entry-copy > p span, .future p span { display: block; margin-top: .6rem; color: #8996aa; }
+main { padding-bottom: 5rem; }
+.section-heading { display: flex; align-items: end; justify-content: space-between; margin-bottom: 1.2rem; border-bottom: 1px solid #ffffff21; color: #9ba7b9; }
+.section-heading p { margin: 0 0 1rem; font-size: .68rem; }
+.section-heading > span { color: #ffffff42; font-family: 'Cormorant Garamond', serif; font-size: 3.4rem; line-height: .8; }
+.entry-card { display: grid; overflow: hidden; border: 1px solid #ffffff1f; border-radius: 1.5rem; background: #121a2acc; box-shadow: 0 2rem 5rem #0003; }
+.entry-art { position: relative; display: grid; min-height: 17rem; overflow: hidden; background: radial-gradient(circle at 50% 45%, #ffd2cf24, transparent 18%), linear-gradient(145deg, #79273b, #35172a 48%, #111a2b); place-content: center; }
+.entry-art::before, .entry-art::after { position: absolute; inset: 16%; border: 1px solid #ffffff29; border-radius: 50%; content: ''; transform: rotate(18deg); }
+.entry-art::after { inset: 28%; transform: rotate(-18deg); }
+.entry-art > span { color: #ffffffe6; font-family: 'Cormorant Garamond', serif; font-size: 5rem; line-height: 1; }
+.entry-art i { margin-top: .2rem; color: #efb1b7; font-family: Hind, sans-serif; font-size: .9rem; font-style: normal; letter-spacing: .15em; text-align: center; }
+.entry-copy { padding: clamp(1.6rem, 5vw, 3.5rem); }
+.status { display: flex; align-items: center; gap: .55rem; margin: 0 0 1.3rem; color: #a9cdbc; font-size: .64rem; font-weight: 600; }
+.status-dot { width: .42rem; height: .42rem; border-radius: 50%; background: #77b89c; box-shadow: 0 0 0 .25rem #77b89c1a; }
+.entry-copy h2, .future h2 { margin: 0; font-size: clamp(2rem, 5vw, 3.4rem); font-weight: 600; line-height: 1; }
+.entry-copy h2 span, .future h2 span { display: block; margin-top: .65rem; color: #bdc7d5; font-size: .47em; }
+.entry-copy > p, .future p { margin: 1.4rem 0; color: #aeb8c8; font-size: .92rem; line-height: 1.7; }
+.entry-link { display: flex; align-items: center; justify-content: space-between; gap: 1rem; margin-top: 1.7rem; padding-top: 1.25rem; border-top: 1px solid #ffffff1f; text-decoration: none; }
+.entry-link > span:first-child { font-family: 'Cormorant Garamond', serif; font-size: 1.2rem; font-weight: 600; }
+.entry-link small { display: block; margin-top: .2rem; color: #9aa6b8; font-size: .7rem; font-weight: 400; }
+.entry-link > span:last-child { display: grid; width: 2.8rem; height: 2.8rem; flex: none; border-radius: 50%; background: #f1d9d7; color: #321722; place-items: center; transition: transform 180ms ease, background 180ms ease; }
+.entry-link:hover > span:last-child { background: #fff0ec; transform: translate(.15rem, -.15rem); }
+.future { display: flex; gap: 1.25rem; margin-top: 1.25rem; padding: clamp(1.5rem, 5vw, 2.6rem); border: 1px dashed #ffffff26; border-radius: 1.5rem; background: #0c131f8c; }
+.future-mark { display: grid; width: 2.8rem; height: 2.8rem; flex: none; border: 1px solid #ffffff24; border-radius: 50%; color: #efb1b7; place-items: center; }
+.future h2 { font-size: clamp(1.65rem, 4vw, 2.35rem); }
+.future p { max-width: 42rem; margin-bottom: 0; }
+footer { display: flex; justify-content: space-between; gap: 1rem; padding: 1.5rem 0 2.5rem; border-top: 1px solid #ffffff1a; color: #738096; font-size: .72rem; }
+:focus-visible { outline: 3px solid #f1b8bd; outline-offset: 4px; }
+
+@media (min-width: 48rem) {
+  .site-shell { width: min(calc(100% - 4rem), 70rem); }
+  .entry-card { grid-template-columns: minmax(18rem, .78fr) 1.22fr; }
+  .entry-art { min-height: 31rem; }
+  .future { align-items: center; gap: 2rem; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after { scroll-behavior: auto !important; transition-duration: .01ms !important; }
+}

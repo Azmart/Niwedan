@@ -56,7 +56,7 @@ export default function MusicPlayer() {
 
   return (
     <>
-      <audio ref={audioRef} src="/music.m4a" loop preload="auto" />
+      <audio ref={audioRef} src={`${import.meta.env.BASE_URL}music.m4a`} loop preload="auto" />
 
       {/* First-visit gate */}
       <AnimatePresence>
