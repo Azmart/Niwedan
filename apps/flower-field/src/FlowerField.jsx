@@ -1,4 +1,5 @@
 import { useRef, useState } from 'react'
+import MusicPlayer from './MusicPlayer.jsx'
 
 const MAX = 20
 const STAR_MAX = 48
@@ -21,7 +22,17 @@ function FlowerArt({ type }) {
 
 function Flower({ bloom, index }) {
   const type = index === 0 ? 'rose' : types[index % types.length]
-  return <div className={`flower ${type}`} style={{ left: `${bloom.x}%`, top: `${bloom.y}%` }} aria-hidden="true"><FlowerArt type={type} /></div>
+  return <div className={`flower ${type}`} style={{ left: `${bloom.x}%`, top: `${bloom.y}%`, '--breeze-delay': `${(index % 5) * .55}s` }} aria-hidden="true"><div className="flower-breeze"><FlowerArt type={type} /></div></div>
+}
+
+function Bee({ variant }) {
+  return <div className={`bee bee-${variant}`} aria-hidden="true">
+    <svg viewBox="0 0 80 56" focusable="false">
+      <g className="bee-wings"><path d="M38 27 C25 10 9 16 16 29 C21 37 31 34 38 29Z" /><path d="M43 25 C48 5 66 6 65 20 C63 30 52 31 43 28Z" /></g>
+      <path className="bee-body" d="M30 25 C32 15 48 14 53 23 C58 33 48 42 38 39 C31 37 28 31 30 25Z" />
+      <path className="bee-stripes" d="M36 18 L35 38 M43 16 L44 40 M50 19 L52 35" /><circle className="bee-face" cx="34" cy="25" r="4" /><path className="bee-trail" d="M13 34 C4 29 7 19 16 20" />
+    </svg>
+  </div>
 }
 
 export default function FlowerField() {
@@ -60,13 +71,15 @@ export default function FlowerField() {
   const done = blooms.length === MAX
   const showFinalMessage = done && !finalMessageDismissed
   return <main className="app">
+    <MusicPlayer />
     <a className="skip" href="#controls">Skip to flower controls</a>
     <header><a className="home" href="/">← Back to our archive <small lang="ne">हाम्रो संग्रहमा फर्कनुहोस्</small></a><p className="counter" aria-live="polite"><b>{blooms.length}</b> / {MAX} blooms</p></header>
     <section className="intro"><p>A small place to land after a very full day</p><h1>For all the meetings, calls, and late-night words—<em>I am so proud of you.</em></h1><span lang="ne">धेरै मिटिङ, कल्स र राति अबेरसम्मका मिठा कुराहरूपछि पनि तिमीले धेरै राम्रो काम गरिरहेकी छौ। म तिमीमाथि एकदमै गर्व गर्छु, माया। 😘</span></section>
     <section className={`meadow ${done ? 'done' : ''}`} ref={scene} aria-label="Interactive evening flower field: tap the sky to light a star, or tap the grass to grow a flower. Drag to wander." onPointerDown={down} onPointerMove={move} onPointerUp={up} onPointerCancel={cancel}>
       <div className="moon" aria-hidden="true" /><div className="stars" aria-hidden="true">{stars.map((star, index) => <i key={`${star.x}-${star.y}-${index}`} style={{ left: `${star.x}%`, top: `${star.y}%`, '--star-delay': `${index * 70}ms` }} />)}</div><div className="hills far" aria-hidden="true" /><div className="hills near" aria-hidden="true" /><div className="fireflies" aria-hidden="true"><i/><i/><i/><i/><i/><i/></div>
       <div className="garden" style={{ transform: `translateX(${offset}%)` }}>{blooms.map((bloom,index) => <Flower bloom={bloom} index={index} key={`${index}-${bloom.x}`} />)}</div>
-      {!done ? <p className="hint">Tap the sky to light a star. Tap the grass to grow a flower—first is a rose. <span>↔ Drag to wander</span></p> : showFinalMessage && <div className="final" role="status"><button className="final-close" type="button" aria-label="Close message and view the flower field" onClick={() => setFinalMessageDismissed(true)}><span aria-hidden="true">×</span></button><i>✦</i><h2>Twenty flowers still cannot hold everything you did today.</h2><p>You worked so hard. Now let your heart feel light. I am so proud of you, my love. 💖</p><p lang="ne">बीस फूलले पनि तिमीले आज गरेका सबै कुरा अटाउन सक्दैनन्। धेरै मेहनत गरेकी छौ, अब मन आनन्दित बनाऊ। तिमीमाथि धेरै गर्व छ, मायालु। 💖</p></div>}
+      {blooms.length > 5 && <div className="bees" aria-hidden="true"><Bee variant="one" /><Bee variant="two" /></div>}
+      {!done ? <p className="hint">Tap the sky to light a star. Tap the grass to grow a flower. <span>↔ Drag to wander</span></p> : showFinalMessage && <div className="final" role="status"><button className="final-close" type="button" aria-label="Close message and view the flower field" onClick={() => setFinalMessageDismissed(true)}><span aria-hidden="true">×</span></button><i>✦</i><h2>Twenty flowers still cannot hold everything you did today.</h2><p>You worked so hard. Now let your heart feel light. I am so proud of you, my love. 💖</p><p lang="ne">बीस फूलले पनि तिमीले आज गरेका सबै कुरा अटाउन सक्दैनन्। धेरै मेहनत गरेकी छौ, अब मन आनन्दित बनाऊ। तिमीमाथि धेरै गर्व छ, मायालु। 💖</p></div>}
     </section>
     <section className="controls" id="controls"><p>{done ? 'The meadow is glowing because you are here.' : 'One flower at a time. No rush.'}</p><button type="button" onClick={() => plant()} disabled={done}>{done ? 'All twenty blooms are here ✦' : `Grow flower ${blooms.length + 1} of ${MAX}`}</button><small lang="ne">फूल फुलाउन यहाँ थिच्नुहोस्</small></section>
   </main>

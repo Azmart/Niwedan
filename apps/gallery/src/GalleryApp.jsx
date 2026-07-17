@@ -30,7 +30,7 @@ export default function GalleryApp() {
         </section>
         <section className="future" aria-labelledby="future-title">
           <span className="future-mark" aria-hidden="true">＋</span>
-          <div><h2 id="future-title">{content.futureTitleEn}<span lang="ne">{content.futureTitleNe}</span></h2><p>{content.futureBodyEn}<span lang="ne">{content.futureBodyNe}</span></p></div>
+          <div><h2 id="future-title">{content.futureTitleEn}<span lang="ne">{content.futureTitleNe}</span></h2></div>
         </section>
       </main>
       <footer><span>{content.footerEn}</span><span lang="ne">{content.footerNe}</span></footer>

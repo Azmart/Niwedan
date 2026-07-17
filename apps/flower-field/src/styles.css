@@ -4,6 +4,16 @@ body{min-width:320px;min-height:100vh;margin:0;overflow-x:hidden}
 button,a{font:inherit}
 :focus-visible{outline:3px solid #fff0a6;outline-offset:4px}
 .app{min-height:100svh;overflow:hidden;background:linear-gradient(#17274b,#46618b 45%,#28534e 72%,#14313a)}
+.music-choice-backdrop{position:fixed;z-index:30;inset:0;display:grid;place-items:center;padding:1rem;background:#0b1736ba;backdrop-filter:blur(12px)}
+.music-choice{width:min(100%,31rem);padding:clamp(1.5rem,5vw,2.6rem);border:1px solid #fff1c970;border-radius:1.5rem;background:linear-gradient(145deg,#21395c,#172943);box-shadow:0 1.5rem 5rem #081027a8;text-align:center}
+.music-choice-eyebrow{margin:0;color:#f4d998;font-size:.67rem;font-weight:800;letter-spacing:.14em;text-transform:uppercase}
+.music-choice>i{display:block;margin:.85rem 0 .35rem;color:#ffe995;font-size:1.4rem}
+.music-choice h2{margin:0;font:500 clamp(1.7rem,6vw,2.65rem)/1.02 Georgia,serif;letter-spacing:-.035em}
+.music-choice-ne{margin:.45rem 0 0;color:#d6e6d0;font:600 clamp(1rem,3vw,1.2rem)/1.35 Georgia,serif}
+.music-choice-copy{margin:1rem auto 1.25rem;color:#f5efe3;font-size:.87rem;line-height:1.55}.music-choice-copy span{color:#c5ddca}
+.music-choice-actions{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:.7rem}.music-choice-actions button{display:grid;place-items:center;min-height:3.25rem;padding:.6rem;border-radius:1rem;cursor:pointer;font-size:.82rem;font-weight:800;line-height:1.2}.music-choice-actions small{display:block;margin-top:.18rem;font-size:.72rem;font-weight:600}.music-choice-play{border:0;background:linear-gradient(135deg,#fff0bd,#eab7b6);color:#3e2030;box-shadow:0 .45rem 1rem #0d1e343b}.music-choice-quiet{border:1px solid #fff2bb82;background:#ffffff12;color:#fff9e9}.music-choice-note{display:block;margin-top:1rem;color:#c6d7d0;font-size:.68rem}
+.music-toggle{position:fixed;z-index:12;right:1rem;bottom:1rem;display:inline-flex;align-items:center;gap:.48rem;min-width:44px;min-height:44px;padding:.62rem .85rem;border:1px solid #fff2bb8c;border-radius:99px;background:#142841df;color:#fff9e9;box-shadow:0 .5rem 1.5rem #0a172b75;cursor:pointer;font-size:.75rem;font-weight:800;backdrop-filter:blur(9px)}
+.music-toggle:hover{background:#203b5a}.music-toggle.is-playing{border-color:#ffe995;background:#29485b}.music-toggle-icon{display:grid;place-items:center;width:1rem;color:#ffe995;font-size:.82rem}
 .skip{position:fixed;top:1rem;left:1rem;z-index:20;padding:.7rem 1rem;border-radius:99px;background:#fff8ed;color:#172442;font-weight:700;text-decoration:none;transform:translateY(-200%)}
 .skip:focus{transform:none}
 header{position:relative;z-index:8;display:flex;justify-content:space-between;gap:1rem;width:min(calc(100% - 2rem),75rem);margin:auto;padding:1rem 0}
@@ -25,6 +35,7 @@ header{position:relative;z-index:8;display:flex;justify-content:space-between;ga
 .near{height:50%;background:radial-gradient(ellipse at 30% 100%,#1f4a50,transparent 54%),radial-gradient(ellipse at 85% 100%,#254b45,transparent 48%),linear-gradient(#2c5b4f,#17353b)}
 .garden{position:absolute;z-index:2;inset:0;transition:transform 120ms ease-out}
 .flower{position:absolute;width:clamp(4rem,8vw,5.8rem);height:clamp(6.4rem,13vw,9.4rem);transform:translate(-50%,-78%);filter:drop-shadow(0 .25rem .2rem #0c27334a)}
+.flower-breeze{width:100%;height:100%;transform-origin:50% 100%;animation:meadow-breeze 6.8s calc(1.25s + var(--breeze-delay)) ease-in-out infinite alternate}
 .flower svg{width:100%;height:100%;overflow:visible}
 .rose svg{transform:scale(1.2);transform-origin:50% 100%}
 .stem-line{fill:none;stroke:#3f854c;stroke-width:5;stroke-linecap:round;stroke-dasharray:1;stroke-dashoffset:1;animation:stem-grow .48s cubic-bezier(.33,.8,.38,1) both}
@@ -34,7 +45,7 @@ header{position:relative;z-index:8;display:flex;justify-content:space-between;ga
 .leaf-right{fill:#79b969;transform-origin:0 50%;animation-delay:.38s}
 .rose-leaf{fill:#397c43;stroke:#204f35;stroke-width:1.4}
 .thorn{fill:none;stroke:#28603b;stroke-width:2;stroke-linecap:round;stroke-dasharray:24;stroke-dashoffset:24;animation:thorn-in .25s .36s ease-out both}
-.flower-head{transform-box:fill-box;transform-origin:50% 100%;opacity:0;animation:head-bloom .72s .42s cubic-bezier(.18,.85,.24,1) both,flower-sway 4.8s 1.2s ease-in-out infinite alternate}
+.flower-head{transform-box:fill-box;transform-origin:50% 100%;opacity:0;animation:head-bloom .72s .42s cubic-bezier(.18,.85,.24,1) both}
 .flower-center,.flower-detail{transform-box:fill-box;transform-origin:center;opacity:0;animation:detail-in .35s .83s ease-out both}
 .rose-head{transform-origin:50% 100%}
 .rose-sepals{fill:none;stroke:#6f243b;stroke-width:2;stroke-linecap:round}
@@ -73,6 +84,15 @@ header{position:relative;z-index:8;display:flex;justify-content:space-between;ga
 .fireflies i:nth-child(4){left:75%;top:51%;animation-delay:-3s}
 .fireflies i:nth-child(5){left:90%;top:29%;animation-delay:-1.5s}
 .fireflies i:nth-child(6){left:47%;top:72%;animation-delay:-2.5s}
+.bees{position:absolute;z-index:3;inset:44% 0 0;overflow:hidden;pointer-events:none}
+.bee{position:absolute;width:clamp(2.5rem,5vw,3.7rem);filter:drop-shadow(0 .13rem .12rem #102d3560);transform-origin:center;will-change:transform}
+.bee svg{display:block;width:100%;height:auto;overflow:visible}
+.bee-one{left:13%;top:30%;animation:bee-flight-one 9.5s ease-in-out infinite}
+.bee-two{left:66%;top:48%;animation:bee-flight-two 12s -3.5s ease-in-out infinite}
+.bee-wings{fill:#f8f4d8c9;stroke:#c7d9d5;stroke-width:1.5;transform-box:fill-box;transform-origin:50% 70%;animation:bee-wing-flap .22s ease-in-out infinite alternate}
+.bee-body{fill:#efbd3e;stroke:#5b3b23;stroke-width:2}
+.bee-stripes{fill:none;stroke:#493022;stroke-width:3;stroke-linecap:round}
+.bee-face{fill:#3b2b28}.bee-trail{fill:none;stroke:#f5edbd;stroke-width:1.5;stroke-linecap:round;stroke-dasharray:3 4;opacity:.75}
 .hint{position:absolute;z-index:4;bottom:1.2rem;left:50%;width:min(calc(100% - 2rem),38rem);margin:0;padding:.8rem 1rem;border:1px solid #fff3d34d;border-radius:1rem;background:#13253d99;color:#fff9e9;font:600 clamp(.72rem,2.5vw,.88rem)/1.45 Georgia,serif;text-align:center;transform:translateX(-50%);backdrop-filter:blur(8px)}
 .hint span{display:block;margin-top:.2rem;color:#d3ead0;font:600 .64rem/1.3 Inter,sans-serif;letter-spacing:.08em;text-transform:uppercase}
 .final{position:absolute;z-index:6;top:50%;left:50%;width:min(calc(100% - 2rem),38rem);padding:clamp(1.35rem,4vw,2.4rem);border:1px solid #fff2bb82;border-radius:1.5rem;background:#182b3ad9;box-shadow:0 1.5rem 5rem #0b1728a8;text-align:center;transform:translate(-50%,-50%);backdrop-filter:blur(12px);animation:note .7s ease-out both}
@@ -97,7 +117,10 @@ header{position:relative;z-index:8;display:flex;justify-content:space-between;ga
 @keyframes head-bloom{0%{opacity:0;transform:translateY(11px) scale(.2,.3)}55%{opacity:1;transform:translateY(0) scale(.88,1.03)}100%{opacity:1;transform:translateY(0) scale(1)}}
 @keyframes petal-layer{from{opacity:0;transform:scale(.5)}to{opacity:1;transform:scale(1)}}
 @keyframes detail-in{from{opacity:0;transform:scale(.35)}to{opacity:1;transform:scale(1)}}
-@keyframes flower-sway{from{transform:rotate(-1.2deg)}to{transform:rotate(1.2deg)}}
+@keyframes meadow-breeze{0%{transform:translateX(-.4px) rotate(-.8deg)}45%{transform:translateX(1.2px) rotate(1.15deg)}75%{transform:translateX(.45px) rotate(.35deg)}100%{transform:translateX(-.65px) rotate(-.65deg)}}
+@keyframes bee-flight-one{0%,100%{transform:translate(0,0) rotate(4deg)}24%{transform:translate(5rem,-1.6rem) rotate(-8deg)}51%{transform:translate(10.5rem,.45rem) rotate(5deg)}76%{transform:translate(5.5rem,2.1rem) rotate(11deg)}}
+@keyframes bee-flight-two{0%,100%{transform:translate(0,0) rotate(-8deg)}28%{transform:translate(-4.5rem,-2.2rem) rotate(8deg)}56%{transform:translate(-10rem,-.4rem) rotate(-3deg)}79%{transform:translate(-5.2rem,2.4rem) rotate(-13deg)}}
+@keyframes bee-wing-flap{from{transform:rotate(-10deg) scaleY(.88)}to{transform:rotate(10deg) scaleY(1.08)}}
 @keyframes star-in{from{opacity:0;transform:scale(0) rotate(-30deg)}
 to{opacity:1;transform:scale(1) rotate(0)}
 }
@@ -114,4 +137,6 @@ header{padding-top:1.5rem}
 }
 @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;animation-delay:0ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}
 .garden{transition:none}
+.music-choice-backdrop{backdrop-filter:none}
+.flower-breeze,.bee,.bee-wings{animation:none}
 }
