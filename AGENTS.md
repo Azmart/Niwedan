@@ -96,6 +96,17 @@ desktop widths.
   petitioner's own notification of her answer, not background surveillance).
 - Keep it a static SPA deployable to Netlify/Vercel with no env vars.
 
+### Mission 143 quiz sharing exception
+
+Mission 143 may send quiz events only after the player deliberately chooses the
+equal-weight **Share attempts** action and has first seen the disclosure. Those
+events may include raw typed answers, selections, attempts, lives, and replay
+count for Person A through Discord. The player can stop future sharing at any
+time; messages already delivered to Discord cannot be recalled. Identity
+checks, all pre-consent interaction, private play, and unrelated activity must
+never transmit. This narrow exception does not permit silent analytics,
+background tracking, or any other outbound data collection.
+
 # Agent Execution Protocol & Architecture Framework
 
 This protocol establishes a strict, token-efficient Orchestrator-Worker pattern for all engineering, refactoring, and feature development tasks in this workspace.

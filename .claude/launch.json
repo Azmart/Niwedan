@@ -6,6 +6,13 @@
       "runtimeExecutable": "npm",
       "runtimeArgs": ["run", "dev"],
       "port": 5173
+    },
+    {
+      "name": "mission-143",
+      "runtimeExecutable": "npm",
+      "runtimeArgs": ["run", "dev:mission"],
+      "port": 5176,
+      "autoPort": true
     }
   ]
 }

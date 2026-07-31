@@ -1,0 +1,409 @@
+/* Mission 143 - light romantic theme. Single theme, no dark mode block. */
+:root {
+  --paper: #FFF6F2;
+  --blush: #FFE3EA;
+  --sky: #E3F0FF;
+  --surface: #FFFFFF;
+  --ink: #3A2233;
+  --ink-soft: #7A6070;
+  --line: #F0D6DF;
+  /* --accent darkened from the spec's #E04A73 to #CC3468 so accent-ink text
+     clears 4.5:1 AA against it (measured about 4.9:1). Single accent, reused
+     everywhere: buttons, eyebrow, focus ring, antenna glow, active borders. */
+  --accent: #CC3468;
+  --accent-ink: #FFFFFF;
+  --accent-soft: #FDE7EE;
+  /* --good/--bad darkened from the spec defaults so feedback text clears
+     4.5:1 AA on the --accent-soft feedback background. */
+  --good: #1B6E52;
+  --bad: #B33D2C;
+  --metal: #DCE6FA;
+  --metal-dark: #B4C4E8;
+  --screen: #F4F8FF;
+}
+
+* { box-sizing: border-box }
+
+:root { font-family: ui-rounded, "Trebuchet MS", system-ui, sans-serif; color: var(--ink); font-synthesis: none }
+
+body {
+  margin: 0;
+  min-width: 320px;
+  background:
+    radial-gradient(circle at 82% 8%, var(--blush) 0, transparent 30rem),
+    radial-gradient(circle at 12% 88%, var(--sky) 0, transparent 26rem),
+    var(--paper);
+}
+
+button, input { font: inherit }
+
+button {
+  min-height: 44px;
+  border: 1.5px solid var(--line);
+  border-radius: 999px;
+  background: var(--surface);
+  color: var(--ink);
+  padding: .72rem 1.1rem;
+  cursor: pointer;
+  transition: transform .2s, border-color .2s, background .2s;
+}
+button:hover { transform: translateY(-2px); border-color: var(--accent) }
+button:disabled { opacity: .45; cursor: not-allowed; transform: none }
+.primary { background: var(--accent); color: var(--accent-ink); border-color: var(--accent); font-weight: 800 }
+.primary:hover { border-color: var(--accent) }
+
+input:focus-visible, button:focus-visible, a:focus-visible {
+  outline: 3px solid var(--accent);
+  outline-offset: 3px;
+}
+
+.mission { height: 100dvh; min-height: 0; display: grid; grid-template-rows: auto 1fr auto; overflow: hidden; position: relative }
+.particles { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; opacity: .6 }
+
+header, footer {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 1.1rem clamp(1rem, 4vw, 4rem);
+  font-size: .82rem;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+.back { color: var(--ink-soft); text-decoration: none }
+.brand { font-weight: 800; color: var(--accent) }
+.audio-toggle, footer button { min-height: auto; padding: .35rem .55rem; border-radius: 16px; font-size: .7rem }
+.back, .audio-toggle, footer button, .audio-notice button {
+  min-width: 44px; min-height: 44px; display: inline-flex; align-items: center; justify-content: center;
+}
+.back { padding: .5rem; text-decoration: none }
+.audio-toggle, footer button { padding: .5rem .7rem }
+
+.scene { min-height: 0; overflow-y: auto; overflow-x: hidden; display: grid; place-items: start center; padding: 1.4rem; position: relative; z-index: 1 }
+.scene > div { width: 100% }
+.scene .screen { margin: auto }
+
+.screen {
+  width: min(100%, 680px);
+  text-align: center;
+  padding: clamp(1.5rem, 4vw, 3rem);
+  border-radius: 28px;
+  background: rgba(255, 255, 255, .92);
+  border: 1px solid var(--line);
+  box-shadow: 0 24px 60px rgba(224, 74, 115, .12);
+}
+.screen.wide { width: min(100%, 740px) }
+/* question prompts are full sentences, not 3-word hero titles: smaller type, wider
+   measure, and a compact robot so the prompt and options share the viewport */
+.screen.quiz h1 { font-size: clamp(1.4rem, 2.8vw, 1.95rem); max-width: 26ch; line-height: 1.2; letter-spacing: -.02em }
+/* use the independent `scale` property, not transform: mood keyframes animate
+   transform and would otherwise wipe the shrink out mid-animation */
+.screen.quiz .robot { scale: .7; transform-origin: top center; margin-bottom: -50px }
+
+h1 { margin: .25rem auto 1rem; font-size: clamp(2rem, 5vw, 4rem); line-height: .95; letter-spacing: -.06em; max-width: 13ch; color: var(--ink) }
+h2 { font-size: 1.05rem; margin-top: 1.6rem; color: var(--ink) }
+.eyebrow { color: var(--accent); font: 700 .72rem ui-monospace, monospace; letter-spacing: .16em; text-transform: uppercase }
+p { line-height: 1.6; color: var(--ink-soft); max-width: 57ch; margin: .6rem auto }
+.screen > b { display: inline-block; margin-top: 1.4rem; padding: .4rem .7rem; border: 1.5px solid var(--accent); color: var(--accent); border-radius: 999px; font-size: .74rem; letter-spacing: .1em }
+
+.actions { display: flex; justify-content: center; gap: .7rem; margin-top: 1.5rem; flex-wrap: wrap }
+.actions.equal > * { flex: 1 1 180px }
+.screen form { display: grid; gap: .9rem; max-width: 430px; margin: 1.2rem auto 0; text-align: left }
+.screen form button { justify-self: center; width: 100% }
+label { display: grid; gap: .4rem; color: var(--ink); font-weight: 700 }
+input {
+  min-height: 48px;
+  border-radius: 14px;
+  border: 1.5px solid var(--line);
+  padding: .6rem .75rem;
+  background: var(--surface);
+  color: var(--ink);
+}
+input::placeholder { color: var(--ink-soft) }
+
+.feedback { padding: .75rem 1rem; border-radius: 16px; background: var(--accent-soft) }
+.feedback.good { color: var(--good); font-weight: 700 }
+.feedback.bad { color: var(--bad); font-weight: 700 }
+
+.screen ul { text-align: left; max-width: 380px; margin: 1.1rem auto; padding-left: 1.3rem; color: var(--ink-soft); line-height: 1.8 }
+.screen ul::marker { color: var(--accent) }
+
+.options { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: .7rem; margin-top: 1.5rem }
+.options button { text-align: left; display: flex; align-items: center; min-height: 64px }
+
+.attempt-note { min-height: 1.6rem; font: 700 .75rem ui-monospace, monospace; color: var(--accent) }
+/* quiet secondary action, kept clear of the primary Continue button */
+.step-back { display: block; margin: 1.1rem auto 0; padding: .5rem 1.1rem; font-size: .8rem; color: var(--ink-soft) }
+.robot-line { color: var(--ink-soft) }
+
+.stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: .6rem; margin: 1.5rem 0 }
+.stats div { padding: .75rem .4rem; background: var(--accent-soft); border-radius: 16px }
+.stats dt { font-size: .66rem; text-transform: uppercase; color: var(--ink-soft) }
+.stats dd { margin: .2rem 0 0; font-size: 1.45rem; font-weight: 800; color: var(--accent) }
+.history { text-align: left; max-width: 430px; margin: 0 auto 1.5rem; color: var(--ink-soft); font-size: .85rem; line-height: 1.8 }
+
+
+.typing { min-height: 1.5rem; color: var(--accent); font: 700 .75rem ui-monospace, monospace }
+.typing span[aria-hidden] {
+  display: inline-block;
+  overflow: hidden;
+  white-space: nowrap;
+  border-right: 2px solid var(--accent);
+  animation: type 2.1s steps(34, end), blink .6s step-end infinite;
+}
+@keyframes type { from { width: 0 } to { width: 100% } }
+@keyframes blink { 50% { border-color: transparent } }
+
+.audio-notice {
+  position: fixed;
+  bottom: 1rem;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 6;
+  max-width: calc(100vw - 2rem);
+  padding: .6rem 1rem;
+  background: var(--accent-soft);
+  color: var(--ink);
+  border-radius: 16px;
+  font-size: .8rem;
+}
+.audio-notice button { min-height: 32px; margin-left: .45rem; padding: .3rem .55rem; font-size: .72rem }
+
+footer { justify-content: center; flex-wrap: wrap; border-top: 1px solid var(--line); color: var(--ink-soft) }
+footer p { margin: 0; font-size: .72rem }
+
+.sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0 }
+
+/* ===================== Part 3 - media option cards ===================== */
+/* two columns at every width so the four choices stay comparable side by side.
+   capped at 300px per card so all four fit within a couple of screens on a laptop. */
+.options.media { grid-template-columns: repeat(2, minmax(0, 300px)); justify-content: center; gap: .8rem }
+.options.media button {
+  flex-direction: column;
+  align-items: stretch;
+  padding: .55rem;
+  text-align: center;
+  min-height: auto;
+  border-radius: 20px;
+}
+.option-media {
+  width: 100%;
+  aspect-ratio: 3 / 4;
+  object-fit: cover;
+  border-radius: 14px;
+  display: block;
+  /* clicks belong to the option button, never to the media element itself */
+  pointer-events: none;
+  background: var(--accent-soft);
+}
+.option-media.placeholder {
+  display: grid;
+  place-items: center;
+  background: var(--accent-soft);
+  border: 1.5px dashed var(--line);
+  color: var(--ink-soft);
+  font-size: .72rem;
+  padding: .4rem;
+  text-align: center;
+}
+.options.media button span { font-size: .82rem; line-height: 1.35; margin-top: .5rem; color: var(--ink); font-weight: 600 }
+.options.media button:hover { transform: translateY(-2px); border-color: var(--accent) }
+/* photos are portraits of a person, so a portrait crop suits them. memes are
+   usually landscape, so they get a square box and `contain` to avoid cropping
+   the sides off whatever gets configured later. */
+.media-meme .option-media { aspect-ratio: 1 / 1; object-fit: contain; background: var(--accent-soft) }
+@media (min-width: 760px) {
+  .media-photo .option-media, .media-dress .option-media { aspect-ratio: 4 / 5 }
+}
+
+/* ============================= Part 2 - robot ============================= */
+.heart { --h: 16px; position: relative; width: var(--h); height: var(--h); background: var(--accent); transform: rotate(-45deg); box-shadow: 0 0 12px rgba(224, 74, 115, .5) }
+.heart::before, .heart::after { content: ''; position: absolute; width: var(--h); height: var(--h); border-radius: 50%; background: var(--accent) }
+.heart::before { top: calc(var(--h) * -0.5); left: 0 }
+.heart::after { top: 0; left: calc(var(--h) * 0.5) }
+
+.robot { position: relative; width: 210px; height: 200px; margin: 0 auto 1rem; padding: 0; border: 0; background: none; cursor: pointer }
+.robot:hover { border: 0; transform: none }
+/* face parts are nested (head > face > eye), so every level needs positioning */
+.robot > *, .head > *, .face > *, .torso > * { position: absolute; display: block }
+
+.robot-shadow { bottom: 6px; left: 42px; width: 126px; height: 20px; background: rgba(224, 74, 115, .18); border-radius: 50%; filter: blur(6px) }
+
+.antenna { left: 100px; top: 4px; width: 9px; height: 30px; background: var(--metal-dark); border-radius: 8px }
+.antenna .heart { --h: 14px; left: -2.5px; top: -12px }
+
+.head {
+  left: 40px;
+  top: 33px;
+  width: 128px;
+  height: 86px;
+  border-radius: 34px;
+  background: linear-gradient(160deg, #FFFFFF, var(--metal));
+  box-shadow: inset -9px -9px 16px var(--metal-dark), 0 16px 26px rgba(224, 74, 115, .16);
+  transition: transform .3s;
+}
+.face {
+  inset: 13px 19px;
+  border-radius: 26px;
+  background: var(--screen);
+  border: 2px solid #DCE3FA;
+  box-shadow: inset 0 0 10px rgba(180, 196, 232, .35);
+}
+.ear { top: 30px; width: 17px; height: 26px; background: var(--metal-dark) }
+.ear.left { left: -8px; border-radius: 8px 0 0 8px }
+.ear.right { right: -8px; border-radius: 0 8px 8px 0 }
+
+.brow { top: 16px; width: 14px; height: 3.5px; border-radius: 99px; background: var(--ink); transition: transform .25s }
+.brow.left { left: 20px }
+.brow.right { right: 20px }
+
+.eye { top: 26px; width: 14px; height: 16px; border-radius: 50%; background: var(--ink); transition: all .25s }
+.eye.left { left: 21px }
+.eye.right { right: 21px }
+.eye u { position: absolute; top: 2px; right: 1px; width: 5px; height: 5px; border-radius: 50%; background: #FFFFFF; text-decoration: none; display: block }
+
+.mouth { bottom: 15px; left: 50%; transform: translateX(-50%); width: 22px; height: 8px; border: 0; border-bottom: 2.5px solid var(--ink); border-radius: 0 0 12px 12px; transition: all .25s }
+
+/* blush sits on the face plate, low and outboard of the eyes */
+.cheek { top: 47px; width: 22px; height: 11px; border-radius: 50%; background: var(--accent); opacity: .32; filter: blur(2.5px); transition: opacity .25s }
+.cheek.left { left: 23px }
+.cheek.right { right: 23px }
+
+.torso {
+  left: 57px;
+  top: 118px;
+  width: 96px;
+  height: 55px;
+  border-radius: 20px;
+  background: linear-gradient(160deg, #FFFFFF, var(--metal));
+  box-shadow: inset -8px -8px 14px var(--metal-dark);
+}
+.torso .core.heart { --h: 18px; left: 50%; top: 50%; margin: calc(var(--h) * -0.5) 0 0 calc(var(--h) * -0.5); animation: heartbeat 1.8s ease-in-out infinite }
+
+.arm, .leg { background: var(--metal-dark); border-radius: 999px; transform-origin: top }
+/* arms overlap the torso edge by ~11px so they read as attached, not floating */
+.arm { top: 122px; width: 18px; height: 54px }
+.arm.left { left: 50px; transform: rotate(18deg) }
+.arm.right { right: 50px; transform: rotate(-18deg) }
+.leg { top: 164px; width: 19px; height: 27px }
+.leg.left { left: 75px; transform: rotate(8deg) }
+.leg.right { right: 75px; transform: rotate(-8deg) }
+
+.zzz { display: none; top: 14px; right: 18px; width: 30px; height: 40px }
+.zzz i { position: absolute; left: 0; color: var(--accent); font: 700 .8rem ui-monospace, monospace; font-style: normal; opacity: 0 }
+.zzz i::before { content: 'z' }
+.zzz i:nth-child(1) { bottom: 0; animation: float-z 2.4s ease-in infinite }
+.zzz i:nth-child(2) { bottom: 10px; left: 8px; font-size: .95rem; animation: float-z 2.4s ease-in .6s infinite }
+.zzz i:nth-child(3) { bottom: 20px; left: 16px; font-size: 1.1rem; animation: float-z 2.4s ease-in 1.2s infinite }
+
+@keyframes heartbeat { 0%, 100% { transform: scale(1) } 50% { transform: scale(1.18) } }
+@keyframes float-z { 0% { opacity: 0; transform: translateY(0) } 20% { opacity: 1 } 100% { opacity: 0; transform: translateY(-22px) } }
+@keyframes nod { 50% { transform: rotateX(8deg) translateY(-3px) } }
+@keyframes wave { to { transform: rotate(155deg) } }
+@keyframes breathe { 0%, 100% { transform: rotate(-8deg) scale(1) } 50% { transform: rotate(-8deg) scale(1.02) } }
+@keyframes bounce-happy { from { transform: translateY(0) } to { transform: translateY(-6px) } }
+@keyframes pulse-fast { 0%, 100% { transform: scale(1) } 50% { transform: scale(1.3) } }
+
+/* mood: sleep */
+.robot.sleep { animation: breathe 3s ease-in-out infinite }
+.robot.sleep .eye { height: 3px; top: 33px; background: none; border-bottom: 2.5px solid var(--ink); border-radius: 0 0 99px 99px }
+.robot.sleep .eye u { display: none }
+.robot.sleep .brow { transform: translateY(2px) }
+.robot.sleep .mouth { width: 4px; height: 4px; border: 0; border-radius: 50%; background: var(--ink) }
+.robot.sleep .zzz { display: block }
+
+/* mood: wake */
+.robot.wake .head { animation: nod 1.3s ease-in-out infinite }
+.robot.wake .brow { transform: translateY(-2px) }
+.robot.wake .mouth { width: 16px; height: 6px }
+
+/* mood: shock */
+.robot.shock .eye { width: 20px; height: 22px; top: 20px }
+.robot.shock .brow { transform: translateY(-5px) }
+.robot.shock .brow.left { transform: translateY(-5px) translateX(-3px) }
+.robot.shock .brow.right { transform: translateY(-5px) translateX(3px) }
+.robot.shock .mouth { width: 14px; height: 14px; border: 2px solid var(--ink); border-radius: 50%; background: none }
+.robot.shock .cheek { opacity: .55 }
+
+/* mood: happy */
+.robot.happy { animation: bounce-happy .6s ease-in-out infinite alternate }
+.robot.happy .eye { height: 8px; background: none; border-top: 2.5px solid var(--ink); border-radius: 99px 99px 0 0 }
+.robot.happy .eye u { display: none }
+.robot.happy .mouth { width: 26px; height: 12px; border-bottom-width: 3px }
+.robot.happy .cheek { opacity: 1 }
+
+/* mood: disappointed - patient, not sad or mean */
+.robot.disappointed { filter: saturate(.7) }
+.robot.disappointed .head { transform: rotate(6deg) }
+.robot.disappointed .brow.left { transform: rotate(14deg) translateY(2px) }
+.robot.disappointed .brow.right { transform: rotate(-14deg) translateY(2px) }
+.robot.disappointed .eye { height: 8px; top: 32px }
+.robot.disappointed .mouth { transform: translateX(-50%) rotate(180deg) }
+
+/* mood: gameover */
+.robot.gameover { transform: rotate(10deg) translateY(12px); opacity: .75 }
+.robot.gameover .eye { background: none }
+.robot.gameover .eye u { display: none }
+.robot.gameover .eye::before, .robot.gameover .eye::after {
+  content: ''; position: absolute; left: 0; top: 6px; width: 14px; height: 3px; background: var(--ink); border-radius: 99px;
+}
+.robot.gameover .eye::before { transform: rotate(45deg) }
+.robot.gameover .eye::after { transform: rotate(-45deg) }
+.robot.gameover .mouth { width: 20px; height: 0; border-radius: 0; border-bottom-width: 2px }
+.robot.gameover .antenna .heart, .robot.gameover .antenna .heart::before, .robot.gameover .antenna .heart::after { background: var(--ink-soft); box-shadow: none }
+
+/* mood: celebrate */
+.robot.celebrate .arm.left { animation: wave .45s infinite alternate }
+.robot.celebrate .arm.right { animation: wave .45s .18s infinite alternate }
+/* heart eyes: same square-plus-two-lobes geometry as .heart, applied to .eye itself */
+.robot.celebrate .eye {
+  --h: 12px; width: var(--h); height: var(--h); top: 30px;
+  background: var(--accent); border-radius: 0; transform: rotate(-45deg);
+}
+.robot.celebrate .eye.left { left: 22px }
+.robot.celebrate .eye.right { right: 22px }
+.robot.celebrate .eye u { display: none }
+.robot.celebrate .eye::before, .robot.celebrate .eye::after {
+  content: ''; position: absolute; width: var(--h); height: var(--h);
+  border-radius: 50%; background: var(--accent);
+}
+.robot.celebrate .eye::before { top: calc(var(--h) * -0.5); left: 0 }
+.robot.celebrate .eye::after { top: 0; left: calc(var(--h) * 0.5) }
+.robot.celebrate .mouth { width: 26px; height: 14px; border: 2px solid var(--ink); border-top: 0; border-radius: 0 0 16px 16px }
+.robot.celebrate .cheek { opacity: 1 }
+.robot.celebrate .antenna .heart { animation: pulse-fast .5s ease-in-out infinite }
+
+@media (max-width: 520px) {
+  header { padding: .9rem 1rem }
+  .back { font-size: .7rem }
+  .options { grid-template-columns: 1fr }
+  .options.media { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: .5rem }
+  .screen { padding: 1.4rem 1rem; border-radius: 22px }
+  /* claw back the padding chain on media questions so the photos are big enough
+     to actually judge on a phone. scene + card + button padding all shrink. */
+  .scene:has(.screen.wide) { padding: 1.4rem .6rem }
+  .screen.wide { padding: 1.4rem .5rem }
+  .options.media button { padding: .3rem }
+  .options.media button span { font-size: .78rem }
+  h1 { font-size: 2.2rem }
+  .stats { grid-template-columns: repeat(2, 1fr) }
+  .robot { scale: .81; transform-origin: top center; margin-top: -19px; margin-bottom: -19px }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *:before, *:after {
+    animation-duration: .01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: .01ms !important;
+    scroll-behavior: auto !important;
+  }
+  .particles { display: none }
+  .typing span[aria-hidden] { animation: none; border: 0 }
+
+  /* Static mood expressions must remain distinguishable with motion collapsed. */
+  .robot.sleep { transform: rotate(-8deg) }
+  .robot.sleep .zzz i { opacity: 1 }
+  .robot.happy { transform: translateY(-6px) }
+}

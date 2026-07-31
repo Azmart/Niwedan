@@ -16,6 +16,10 @@ export default defineConfig({
         target: 'http://localhost:5175',
         changeOrigin: true,
       },
+      '/apps/mission-143': {
+        target: 'http://localhost:5176',
+        changeOrigin: true,
+      },
     },
   },
   build: {

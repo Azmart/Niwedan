@@ -25,6 +25,17 @@ respectful request to save one photo. A personal gift styled as a legal filing.
    modal with Escape, semantic landmarks, strong contrast).
 7. **No real private photos** committed — `PhotoFrame.jsx` is a placeholder.
 
+### Mission 143 quiz sharing exception
+
+Mission 143 may send quiz events only after the player deliberately chooses the
+equal-weight **Share attempts** action and has first seen the disclosure. Those
+events may include raw typed answers, selections, attempts, lives, and replay
+count for Person A through Discord. The player can stop future sharing at any
+time; messages already delivered to Discord cannot be recalled. Identity
+checks, all pre-consent interaction, private play, and unrelated activity must
+never transmit. This narrow exception does not permit silent analytics,
+background tracking, or any other outbound data collection.
+
 ## Commands
 
 ```bash

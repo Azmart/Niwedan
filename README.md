@@ -2,7 +2,8 @@
 
 A bilingual workspace for a growing collection of small, personal apps. The
 App Gallery lives at `/`; each chapter is built independently beneath `/apps/`.
-The first chapter is **Niwedan**.
+The collection currently includes **Niwedan**, **Flowers for Today**, and
+**Mission 143**.
 
 ## App #1: निवेदन · Niwedan
 
@@ -59,7 +60,7 @@ keeping the bundle light (~100 KB gzipped JS).
 npm install      # install dependencies
 npm run dev      # start the Gallery → http://localhost:5173/
 npm run dev:niwedan # start Niwedan independently
-npm run build    # assemble Gallery + Niwedan → dist/
+npm run build    # assemble all four workspaces → dist/
 npm run preview  # preview the assembled dist/ output
 ```
 
@@ -130,9 +131,10 @@ start time via `START_AT` in
 
 ## ☁️ Deployment
 
-The workspace builds three static SPAs into one `dist/` directory: the Gallery
-at `/`, Niwedan at `/apps/niwedan/`, and Flower Field at
-`/apps/flower-field/`, plus one optional serverless notification endpoint.
+The workspace builds four static SPAs into one `dist/` directory: the Gallery
+at `/`, Niwedan at `/apps/niwedan/`, Flower Field at `/apps/flower-field/`, and
+Mission 143 at `/apps/mission-143/`, plus optional serverless notification
+endpoints.
 Netlify and Vercel can serve the supplied per-app SPA rewrites and endpoint.
 Two easy options:
 
@@ -154,7 +156,8 @@ vercel --prod   # production deploy
 
 **Dashboard:** "Add new site" → "Import an existing project," pick the repo.
 Settings are read from `netlify.toml` (build `npm run build`, publish `dist`,
-plus Gallery, Niwedan, and Flower Field SPA redirects). Click **Deploy**.
+plus Gallery, Niwedan, Flower Field, and Mission 143 SPA redirects). Click
+**Deploy**.
 
 **CLI:**
 
@@ -181,9 +184,11 @@ Google Fonts via `<link>` in `index.html`.
 
 The whole point of the site is in the final section: **only with permission.**
 If the answer is no, the gallery stays empty and that is completely fine — the
-compliment is permanent either way. No personal information is collected. The
-only thing a button can send is the optional Discord confirmation (just *which*
-choice was made, and only if you set up the webhook) — never anything about her.
+compliment is permanent either way. Niwedan itself only sends the optional
+Discord confirmation (just *which* choice was made, and only if you set up the
+webhook). Mission 143 has a separate, equal-weight opt-in before question one
+for sharing raw quiz attempts; private play and all pre-consent activity remain
+local, and she can stop future sharing at any time.
 
 ---
 

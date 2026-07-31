@@ -19,6 +19,11 @@
   status = 200
 
 [[redirects]]
+  from = "/apps/mission-143/*"
+  to = "/apps/mission-143/index.html"
+  status = 200
+
+[[redirects]]
   from = "/*"
   to = "/index.html"
   status = 200

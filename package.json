@@ -9,18 +9,22 @@
   ],
   "scripts": {
     "prebuild": "node scripts/clean-dist.js",
-    "dev": "concurrently --kill-others-on-fail --names gallery,niwedan,flowers \"npm run dev:gallery\" \"npm run dev:niwedan\" \"npm run dev:flowers\"",
+    "dev": "concurrently --kill-others-on-fail --names gallery,niwedan,flowers,mission \"npm run dev:gallery\" \"npm run dev:niwedan\" \"npm run dev:flowers\" \"npm run dev:mission\"",
     "dev:gallery": "npm run dev --workspace @niwedan/gallery",
     "dev:niwedan": "npm run dev --workspace @niwedan/niwedan",
     "dev:flowers": "npm run dev --workspace @niwedan/flower-field",
-    "build": "npm run build:gallery && npm run build:niwedan && npm run build:flowers",
+    "dev:mission": "npm run dev --workspace @niwedan/mission-143",
+    "build": "npm run build:gallery && npm run build:niwedan && npm run build:flowers && npm run build:mission",
     "build:gallery": "npm run build --workspace @niwedan/gallery",
     "build:niwedan": "npm run build --workspace @niwedan/niwedan",
     "build:flowers": "npm run build --workspace @niwedan/flower-field",
+    "build:mission": "npm run build --workspace @niwedan/mission-143",
     "test": "node --test tests/*.test.js",
     "preview": "npm run preview:gallery",
     "preview:gallery": "npm run preview --workspace @niwedan/gallery",
-    "preview:niwedan": "npm run preview --workspace @niwedan/niwedan"
+    "preview:niwedan": "npm run preview --workspace @niwedan/niwedan",
+    "preview:flowers": "npm run preview --workspace @niwedan/flower-field",
+    "preview:mission": "npm run preview --workspace @niwedan/mission-143"
   },
   "engines": {
     "node": ">=20"
