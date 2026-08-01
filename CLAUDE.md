@@ -54,6 +54,8 @@ No tests/linter configured. Verify visually at mobile + desktop widths.
 - `src/components/` — one file per section + primitives (`Reveal`, `Modal`,
   `Seal`, `HeartBurst`, `PhotoFrame`, `ParticleField`, `CursorGlow`,
   `MusicPlayer`).
+- `netlify/edge-functions/site-gate.js` — site-wide password gate on `/*` (every
+  path, asset, and API route) when `SITE_PASSWORD` is set; no-op when unset.
 - `src/lib/notify.js` — optional Discord ping (`VITE_DISCORD_WEBHOOK_URL`); the
   only data that leaves the browser, only on her explicit choice. No silent
   tracking.

@@ -95,6 +95,11 @@ desktop widths.
   modal still tells her nothing is sent on her behalf; keep that honest (it's the
   petitioner's own notification of her answer, not background surveillance).
 - Keep it a static SPA deployable to Netlify/Vercel with no env vars.
+- `netlify/edge-functions/site-gate.js` password-gates **every** path on `/*`,
+  including static assets and `/api/*`, whenever `SITE_PASSWORD` is set. New apps
+  and routes are covered automatically, so do not add path exclusions to it. The
+  gate is a no-op when the variable is unset, which is what keeps `vite dev`
+  usable. Netlify only; Vercel would need its own middleware.
 
 ### Mission 143 quiz sharing exception
 
