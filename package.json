@@ -9,22 +9,26 @@
   ],
   "scripts": {
     "prebuild": "node scripts/clean-dist.js",
-    "dev": "concurrently --kill-others-on-fail --names gallery,niwedan,flowers,mission \"npm run dev:gallery\" \"npm run dev:niwedan\" \"npm run dev:flowers\" \"npm run dev:mission\"",
+    "dev": "concurrently --kill-others-on-fail --names gallery,niwedan,flowers,mission,degree-day \"npm run dev:gallery\" \"npm run dev:niwedan\" \"npm run dev:flowers\" \"npm run dev:mission\" \"npm run dev:degree-day\"",
     "dev:gallery": "npm run dev --workspace @niwedan/gallery",
     "dev:niwedan": "npm run dev --workspace @niwedan/niwedan",
     "dev:flowers": "npm run dev --workspace @niwedan/flower-field",
     "dev:mission": "npm run dev --workspace @niwedan/mission-143",
-    "build": "npm run build:gallery && npm run build:niwedan && npm run build:flowers && npm run build:mission",
+    "dev:degree-day": "npm run dev --workspace @niwedan/degree-day",
+    "dev:little-world": "npm run dev --workspace @niwedan/degree-day -- --configLoader runner",
+    "build": "npm run build:gallery && npm run build:niwedan && npm run build:flowers && npm run build:mission && npm run build:degree-day",
     "build:gallery": "npm run build --workspace @niwedan/gallery",
     "build:niwedan": "npm run build --workspace @niwedan/niwedan",
     "build:flowers": "npm run build --workspace @niwedan/flower-field",
     "build:mission": "npm run build --workspace @niwedan/mission-143",
+    "build:degree-day": "npm run build --workspace @niwedan/degree-day",
     "test": "node --test tests/*.test.js",
     "preview": "npm run preview:gallery",
     "preview:gallery": "npm run preview --workspace @niwedan/gallery",
     "preview:niwedan": "npm run preview --workspace @niwedan/niwedan",
     "preview:flowers": "npm run preview --workspace @niwedan/flower-field",
-    "preview:mission": "npm run preview --workspace @niwedan/mission-143"
+    "preview:mission": "npm run preview --workspace @niwedan/mission-143",
+    "preview:degree-day": "npm run preview --workspace @niwedan/degree-day"
   },
   "engines": {
     "node": ">=20"

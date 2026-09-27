@@ -15,6 +15,7 @@
     { "source": "/apps/niwedan/(.*)", "destination": "/apps/niwedan/index.html" },
     { "source": "/apps/flower-field/(.*)", "destination": "/apps/flower-field/index.html" },
     { "source": "/apps/mission-143/(.*)", "destination": "/apps/mission-143/index.html" },
+    { "source": "/apps/little-world/(.*)", "destination": "/apps/little-world/index.html" },
     { "source": "/(.*)", "destination": "/index.html" }
   ]
 }

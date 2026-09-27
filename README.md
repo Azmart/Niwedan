@@ -2,8 +2,8 @@
 
 A bilingual workspace for a growing collection of small, personal apps. The
 App Gallery lives at `/`; each chapter is built independently beneath `/apps/`.
-The collection currently includes **Niwedan**, **Flowers for Today**, and
-**Mission 143**.
+The collection currently includes **Niwedan**, **Flowers for Today**,
+**Mission 143**, and **Degree Day**.
 
 ## App #1: निवेदन · Niwedan
 
@@ -40,6 +40,19 @@ it just asks — nicely.
   `prefers-reduced-motion` support (animations and the cursor glow switch off).
 - **Mobile-first responsive** design.
 
+## App #4: मेसी · Degree Day
+
+A bilingual, scroll-driven storybook for मेसी’s completed Finance bachelor’s
+at Shankar Dev Campus. One illustrated character travels through campus,
+full-time work and final exams, a brief online hello, the thesis and its
+corrections, tea after submission, and the all-subjects-passed result. The
+final scene leads into a paper-bound personal letter. The lightweight scenery
+is inline SVG/CSS; the page needs no backend or personal photos.
+
+Music from `apps/degree-day/public/music.m4a` is optional and starts only
+when the visitor presses Play. Its first play begins at 11 seconds and later
+loops from the beginning.
+
 ## 🧱 Tech stack
 
 | Tool             | Why                                              |
@@ -60,7 +73,9 @@ keeping the bundle light (~100 KB gzipped JS).
 npm install      # install dependencies
 npm run dev      # start the Gallery → http://localhost:5173/
 npm run dev:niwedan # start Niwedan independently
-npm run build    # assemble all four workspaces → dist/
+npm run dev:degree-day # start Degree Day independently → http://localhost:5177/apps/little-world/
+npm run dev:little-world # alias for Degree Day at http://localhost:5177/apps/little-world/
+npm run build    # assemble all five workspaces → dist/
 npm run preview  # preview the assembled dist/ output
 ```
 
@@ -73,6 +88,12 @@ npm run preview  # preview the assembled dist/ output
 │   │   ├── index.html
 │   │   ├── src/              # bilingual gallery UI and copy
 │   │   └── vite.config.js    # root dist/ build configuration
+│   ├── degree-day/
+│   │   ├── index.html         # entry and page metadata
+│   │   ├── src/               # visual story, music choice, and handwritten letter
+│   │   └── vite.config.js     # /apps/little-world/ build configuration
+│   ├── flower-field/          # Flowers for Today app
+│   ├── mission-143/           # bilingual quiz app
 │   └── niwedan/
 │       ├── index.html         # entry, fonts, meta
 │       ├── public/            # favicon + music
@@ -131,10 +152,10 @@ start time via `START_AT` in
 
 ## ☁️ Deployment
 
-The workspace builds four static SPAs into one `dist/` directory: the Gallery
-at `/`, Niwedan at `/apps/niwedan/`, Flower Field at `/apps/flower-field/`, and
-Mission 143 at `/apps/mission-143/`, plus optional serverless notification
-endpoints.
+The workspace builds five static SPAs into one `dist/` directory: the Gallery
+at `/`, Niwedan at `/apps/niwedan/`, Flower Field at `/apps/flower-field/`,
+Mission 143 at `/apps/mission-143/`, and Degree Day at `/apps/little-world/`, plus
+optional serverless notification endpoints.
 Netlify and Vercel can serve the supplied per-app SPA rewrites and endpoint.
 Two easy options:
 
@@ -156,8 +177,8 @@ vercel --prod   # production deploy
 
 **Dashboard:** "Add new site" → "Import an existing project," pick the repo.
 Settings are read from `netlify.toml` (build `npm run build`, publish `dist`,
-plus Gallery, Niwedan, Flower Field, and Mission 143 SPA redirects). Click
-**Deploy**.
+plus Gallery, Niwedan, Flower Field, Mission 143, and Degree Day SPA redirects).
+Click **Deploy**.
 
 **CLI:**
 
@@ -167,10 +188,9 @@ netlify deploy            # draft deploy
 netlify deploy --prod     # production deploy
 ```
 
-> The three apps deploy as static files plus one optional serverless
-> notification endpoint. Its only optional setting is `DISCORD_WEBHOOK_URL`
-> (see "Get a ping when she answers"); without it, nothing else needs
-> configuring for the current implementation.
+> The four personal apps deploy as static files alongside the Gallery and its
+> existing optional serverless endpoints. Degree Day needs no server settings;
+> its MP3 is an optional static file.
 
 ## 📦 Dependencies added
 

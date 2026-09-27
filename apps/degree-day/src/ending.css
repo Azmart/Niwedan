@@ -1,0 +1,132 @@
+.ceremony-section {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  background: radial-gradient(circle at 72% 46%, #987e75 0, transparent 35rem), linear-gradient(145deg, #243b49, #684c5b 72%, #8d5a61);
+}
+.ceremony-section::before {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background-image: radial-gradient(#ffe6b7 1px, transparent 1px);
+  background-size: 43px 43px;
+  opacity: .11;
+  content: "";
+}
+.ceremony-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(19rem, 1.1fr);
+  align-items: center;
+  gap: clamp(1.5rem, 5vw, 5rem);
+  min-height: min(55rem, 100svh);
+  padding-block: clamp(4.5rem, 9vw, 7rem);
+}
+.ceremony-copy { max-width: 32rem; }
+.ceremony-eyebrow, .invitation-eyebrow {
+  margin: 0 0 .8rem;
+  color: #ffe1a8;
+  font-size: .76rem;
+  font-weight: 800;
+  letter-spacing: .07em;
+  text-transform: uppercase;
+}
+.ceremony-copy h2, .invitation-copy h2 {
+  margin: 0 0 1.45rem;
+  font-family: "Cormorant Garamond", Georgia, serif;
+  font-size: clamp(3.1rem, 6vw, 5.8rem);
+  font-weight: 600;
+  line-height: .94;
+  text-wrap: balance;
+}
+.ceremony-copy h2 span, .invitation-copy h2 span {
+  display: block;
+  margin-top: .6rem;
+  color: #ffd6c8;
+  font-family: Hind, sans-serif;
+  font-size: .31em;
+  font-weight: 500;
+  line-height: 1.3;
+}
+.ceremony-copy > p:not(.ceremony-eyebrow), .invitation-copy > p:not(.invitation-eyebrow) {
+  margin: 0 0 .6rem;
+  color: #fff2df;
+  font-size: clamp(.95rem, 1.5vw, 1.1rem);
+  line-height: 1.6;
+}
+.ceremony-copy > p[lang="ne"], .invitation-copy > p[lang="ne"] { color: #f6d9ce; }
+.ceremony-copy .ceremony-note {
+  margin-top: 1.7rem !important;
+  padding-left: 1rem;
+  border-left: 2px solid #f9d398;
+  color: #ffe3b6 !important;
+  font-size: .88rem !important;
+}
+.ceremony-note span { display: block; margin-top: .35rem; }
+.ceremony-portrait {
+  width: min(100%, 38rem);
+  margin-inline: auto;
+  border: 1px solid #f8dba35c;
+  border-radius: 50% 50% 2rem 2rem;
+  background: linear-gradient(#a67677b5, #f6cf9b37 52%, #253b4a);
+  box-shadow: 0 1.5rem 4rem #101c2780, inset 0 0 0 8px #fff4d010;
+}
+.ceremony-portrait svg { display: block; width: 100%; height: auto; overflow: visible; }
+.ceremony-rays { fill: none; stroke: #ffe8b8; stroke-width: 7; stroke-linecap: round; opacity: .72; }
+.ceremony-arch { fill: none; stroke: #f8d9a38c; stroke-width: 6; }
+.ceremony-floor { fill: #a97978; }
+.ceremony-graduate { transform-origin: 50% 88%; animation: ceremony-rise 5s ease-in-out infinite; }
+.ceremony-confetti { fill: #f8d592; stroke: #ffdad0; stroke-width: 8; stroke-linecap: round; animation: ceremony-sparkle 4s ease-in-out infinite alternate; }
+
+.invitation-section {
+  padding-block: clamp(4rem, 8vw, 7rem);
+  background: radial-gradient(circle at 30% 0, #b07775 0, transparent 32rem), linear-gradient(155deg, #4d4856, #253943 72%);
+}
+.invitation-card {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(19rem, 1fr);
+  gap: clamp(2rem, 5vw, 5rem);
+  align-items: center;
+  padding: clamp(1.5rem, 4vw, 3.5rem);
+  border: 1px solid #f7d9ab6b;
+  border-radius: 1.6rem;
+  background: linear-gradient(130deg, #fff8ed0d, #eec6b20d);
+  box-shadow: 0 1.5rem 4rem #14263255;
+}
+.invitation-copy h2 { font-size: clamp(2.8rem, 5.2vw, 5.25rem); }
+.invitation-form { min-width: 0; padding: clamp(1.25rem, 3vw, 2rem); border: 1px solid #f8dfbb; border-radius: 1.2rem; background: #fff7e9; color: #263740; box-shadow: 0 .8rem 2.5rem #172b3870; }
+.invitation-date-label { display: block; margin-bottom: .8rem; font-weight: 800; }
+.date-hint { margin: .55rem 0 1.4rem; color: #5c5156; font-size: .78rem; }
+.date-disclosure { margin: 0; padding: 1rem; border-radius: .7rem; background: #f4e7d5; color: #3e4247; font-size: .83rem; line-height: 1.45; }
+.date-status { min-height: 0; margin: .75rem 0 0; color: #8e333b; font-size: .83rem; line-height: 1.45; }
+.date-status:empty { display: none; }
+.date-status--success { color: #2b6550; font-weight: 700; }
+.invitation-send, .invitation-replay { min-height: 48px; border-radius: 999px; font-weight: 800; }
+.invitation-send { width: 100%; margin-top: 1rem; padding: .7rem 1rem; border: 0; background: #9b5466; color: #fffaf1; box-shadow: 0 .3rem .7rem #9b54663f; }
+.invitation-send:hover:not(:disabled) { background: #783d52; }
+.invitation-send:disabled { cursor: wait; opacity: .68; }
+.replay-section { padding: 2.6rem 1rem 3.4rem; background: #253943; text-align: center; }
+.replay-inner { display: grid; justify-items: center; gap: .7rem; }
+.replay-inner > span { color: #f9d398; font-size: 1.5rem; }
+.invitation-replay { padding: .6rem 1.4rem; border: 1px solid #ffe1b9; background: transparent; color: #fff6e6; }
+.invitation-replay:hover { background: #fff4dd20; }
+.invitation-replay:focus-visible, .invitation-send:focus-visible { outline: 3px solid #f9d398; outline-offset: 3px; }
+@keyframes ceremony-rise { 50% { transform: translateY(-9px); } }
+@keyframes ceremony-sparkle { 50% { opacity: .52; transform: translateY(8px); } }
+@media (max-width: 48rem) {
+  .ceremony-layout, .invitation-card { grid-template-columns: 1fr; }
+  .ceremony-layout { min-height: 0; gap: 2.3rem; }
+  .ceremony-copy { max-width: 37rem; }
+  .ceremony-portrait { max-width: 30rem; }
+  .invitation-card { gap: 1.5rem; }
+}
+@media (max-width: 30rem) {
+  .ceremony-copy h2, .invitation-copy h2 { font-size: clamp(2.7rem, 13vw, 3.7rem); }
+  .invitation-card { padding: .7rem; }
+  .invitation-form { padding: .7rem; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .ceremony-graduate, .ceremony-confetti { animation: none; }
+}
+@media print {
+  .ceremony-section, .invitation-section, .replay-section { display: none !important; }
+}

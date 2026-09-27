@@ -1,0 +1,27 @@
+export const endingContent = {
+  ceremony: {
+    eyebrowEn: 'A little look ahead',
+    eyebrowNe: 'अब आउने एउटा सुन्दर पल',
+    titleEn: 'And when your ceremony comes…',
+    titleNe: 'अनि जब तिम्रो दीक्षान्त समारोह आउँछ…',
+    bodyEn: 'There you will be, right in the middle of it all. The cap, the applause, that smile — every bit of it yours to enjoy.',
+    bodyNe: 'त्यो दिनको केन्द्रमा तिमी नै हुनेछौ। टोपी, ताली र त्यो मुस्कान — ती सबै पल तिम्रै हुनेछन्।',
+    noteEn: 'For now, this is a little daydream of a day still to come.',
+    noteNe: 'अहिलेलाई, यो आउन बाँकी दिनको एउटा सानो कल्पना हो।',
+    artEn: 'An imagined future graduation ceremony, with her standing proudly at the centre beneath a graduation cap and falling confetti.',
+  },
+  invitation: {
+    eyebrowEn: 'One more important question',
+    titleEn: 'So, hami sangai kahile celebrate garne?',
+    bodyEn: 'Pick a day that feels good to you. I would love to celebrate together whenever it works for you.',
+    dateLabelEn: 'Suggest a day to celebrate',
+    dateHintEn: 'Choose a future date within the next two years',
+    disclosureEn: 'Picking a date does not send anything. Only pressing Send shares your suggestion with me.',
+    sendEn: 'Send my suggestion',
+    sendingEn: 'Sending…',
+    successEn: 'Your suggestion was sent. I’ll be in touch so we can make a plan together.',
+    invalidEn: 'Please choose a future date within the next two years.',
+    failureEn: 'Your suggestion could not be sent. Please try again whenever you’re ready.',
+    replayEn: 'Replay from the beginning',
+  },
+}

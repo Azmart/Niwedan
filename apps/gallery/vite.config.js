@@ -20,6 +20,10 @@ export default defineConfig({
         target: 'http://localhost:5176',
         changeOrigin: true,
       },
+      '/apps/little-world': {
+        target: 'http://localhost:5177',
+        changeOrigin: true,
+      },
     },
   },
   build: {

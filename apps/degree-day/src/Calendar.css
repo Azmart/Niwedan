@@ -1,0 +1,32 @@
+.calendar {
+  position: relative;
+  width: 100%;
+  min-width: 0;
+  padding: .75rem;
+  border: 1px solid #e6c9ae;
+  border-radius: 1.05rem;
+  background: #fffdf8;
+  box-shadow: inset 0 1px 0 #fff, 0 .45rem 1.25rem #78545a18;
+}
+.calendar-head { display: grid; grid-template-columns: 2.5rem minmax(0, 1fr) 2.5rem; align-items: center; gap: .3rem; margin-bottom: .75rem; }
+.calendar-month { color: #5b3d4e; font-family: "Cormorant Garamond", Georgia, serif; font-size: clamp(1.35rem, 3vw, 1.7rem); font-weight: 700; line-height: 1; text-align: center; }
+.calendar-nav { display: grid; place-items: center; width: 2.5rem; height: 2.5rem; border: 1px solid #d8b8ad; border-radius: 50%; background: #f9e9dd; color: #713f56; font: inherit; font-size: 1.8rem; line-height: 1; cursor: pointer; }
+.calendar-nav:hover:not(:disabled) { background: #f0d8c8; }
+.calendar-nav:disabled { opacity: .38; cursor: default; }
+.calendar-weekdays, .calendar-days { display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); gap: .16rem; }
+.calendar-weekdays { margin-bottom: .3rem; color: #785e62; font-size: .68rem; font-weight: 800; text-align: center; text-transform: uppercase; }
+.calendar-weekdays span { min-width: 0; }
+.calendar-day, .calendar-empty { display: grid; place-items: center; width: 100%; min-width: 0; aspect-ratio: 1; }
+.calendar-day { border: 0; border-radius: .65rem; background: transparent; color: #2b3941; font: inherit; font-size: clamp(.8rem, 2.6vw, 1rem); font-weight: 700; cursor: pointer; }
+.calendar-day:hover:not(:disabled) { background: #f5e3d7; }
+.calendar-day:disabled { color: #b8a9a7; cursor: default; }
+.calendar-day--selected, .calendar-day--selected:hover:not(:disabled) { background: #9b5466; color: #fffaf1; box-shadow: 0 .22rem .5rem #9b54664a; }
+.calendar-nav:focus-visible, .calendar-day:focus-visible { outline: 3px solid #b37931; outline-offset: 2px; }
+.calendar-selection { min-height: 1.4em; margin: .85rem .15rem .1rem; color: #624c55; font-size: .75rem; font-weight: 700; line-height: 1.4; text-align: center; }
+.calendar-selection::before, .calendar-selection::after { content: '✿'; margin-inline: .5rem; color: #c7878c; }
+@media (max-width: 30rem) {
+  .calendar { padding: .4rem; }
+  .calendar-weekdays, .calendar-days { gap: .1rem; }
+  .calendar-day { border-radius: .45rem; }
+  .calendar-selection::before, .calendar-selection::after { margin-inline: .2rem; }
+}

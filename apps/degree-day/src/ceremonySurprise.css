@@ -1,0 +1,58 @@
+.ceremony-surprise-button {
+  position: relative;
+  display: block;
+  width: 100%;
+  padding: 0;
+  overflow: visible;
+  border: 0;
+  border-radius: inherit;
+  background: transparent;
+  color: #fff6e6;
+  cursor: pointer;
+  text-align: center;
+  touch-action: manipulation;
+  user-select: none;
+  -webkit-user-select: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.ceremony-surprise-button:focus-visible {
+  outline: 3px solid #ffe8ae;
+  outline-offset: 6px;
+}
+
+.ceremony-surprise-hint {
+  position: absolute;
+  right: 1rem;
+  bottom: .6rem;
+  left: 1rem;
+  color: #fff4dc;
+  font-size: clamp(.68rem, 1.5vw, .86rem);
+  font-weight: 600;
+  letter-spacing: .02em;
+  text-shadow: 0 2px 8px #142b3f;
+  pointer-events: none;
+}
+
+.ceremony-surprise-hint [lang="ne"] { font-family: Hind, sans-serif; }
+
+.ceremony-cap {
+  transform-box: view-box;
+  transform-origin: 300px 170px;
+}
+
+.ceremony-cap-toss {
+  animation: ceremony-cap-toss 1.35s cubic-bezier(.28, .03, .3, 1) both;
+}
+
+@keyframes ceremony-cap-toss {
+  0%, 100% { transform: translateY(0) rotate(0); }
+  40% { transform: translateY(-90px) rotate(-16deg); }
+  56% { transform: translateY(-92px) rotate(12deg); }
+  76% { transform: translateY(-42px) rotate(-8deg); }
+  91% { transform: translateY(6px) rotate(3deg); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ceremony-cap-toss { animation: none; }
+}

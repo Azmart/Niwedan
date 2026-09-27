@@ -26,7 +26,7 @@ export default function GalleryApp() {
           </div>
           {content.entries.map((entry) => {
             const status = entryStatus(entry)
-            const art = entry.number === '002' ? 'फूलबारी' : entry.number === '003' ? 'मिसन' : 'निवेदन'
+            const art = entry.number === '002' ? 'फूलबारी' : entry.number === '003' ? 'मिसन' : entry.number === '004' ? 'स्नातक' : 'निवेदन'
             return <article className="entry-card" key={entry.number}>
               <div className="entry-art" aria-hidden="true"><span>{entry.number}</span><i>{art}</i></div>
               <div className="entry-copy">
